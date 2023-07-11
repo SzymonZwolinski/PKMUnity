@@ -1,7 +1,11 @@
-public abstract class BaseUnit
+using System;
+using UnityEngine;
+
+public abstract class BaseUnit : Component
 {
 		// Public properties
-	public uint Id { get; private set; }
+	public uint Id { get; protected set; }
+	public Guid UniqueId { get; protected set; }
 	public uint HealthPoints { get; set; }
 	public uint Attack { get; set; }
 	public uint SpecialAttack { get; set; }
@@ -38,6 +42,11 @@ public abstract class BaseUnit
 
 	// Constructors
 
+	protected BaseUnit()
+	{
+
+	}
+
 	protected BaseUnit(
 		uint id,
 		uint healthPoints,
@@ -67,6 +76,7 @@ public abstract class BaseUnit
 		float experiencePointsWorth,
 		float experiencePointsRequirementMultiplier)
 	{
+		UniqueId = Guid.NewGuid();
 		Id = id;
 		HealthPoints = healthPoints;
 		Attack = attack;
