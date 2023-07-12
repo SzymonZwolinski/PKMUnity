@@ -1,39 +1,41 @@
 using System;
 using UnityEngine;
 
-public abstract class BaseUnit : Component
+public abstract class BaseUnit : ScriptableObject
 {
-		// Public properties
-	public uint Id { get; protected set; }
-	public Guid UniqueId { get; protected set; }
-	public uint HealthPoints { get; set; }
-	public uint Attack { get; set; }
-	public uint SpecialAttack { get; set; }
-	public uint Defence { get; set; }
-	public uint SpecialDefence { get; set; }
-	public uint Speed { get; set; }
-	public uint Stamina { get; set; }
-	public bool IsAlive { get; set; }
-	public Types FirstType { get; set; }
-	public Types? SecondaryType { get; set; }
-	public uint Level { get; set; }
-	public float BaseExperiencePointsToNextLevel { get; set; }
-	public float ExperiencePointsToNextLevel { get; set; }
-	public float ExperiencePoints { get; set; }
-	public uint HealthPointsLearned { get; set; }
-	public uint AttackLearned { get; set; }
-	public uint SpecialAttackLearned { get; set; }
-	public uint DefenceLearned { get; set; }
-	public uint SpecialDefenceLearned { get; set; }
-	public uint SpeedLearned { get; set; }
-	public uint StaminaLearned { get; set; }
-	public bool HasBeenSeen { get; set; }
-	public bool HasBeenCaught { get; set; }
-	public HoldItem HeldItem { get; set; }
-	public float ExperiencePointsWorth { get; set; }
+	// Public properties
+	public uint Id;
+	[SerializeField] public Guid UniqueId;
+	[SerializeField] public uint HealthPoints;
+	[SerializeField] public uint Attack;
+	[SerializeField] public uint SpecialAttack;
+	[SerializeField] public uint Defence;
+	[SerializeField] public uint SpecialDefence;
+	[SerializeField] public uint Speed;
+	[SerializeField] public uint Stamina;
+	[SerializeField] public bool IsAlive;
+	[SerializeField] public Types FirstType;
+	[SerializeField] public Types? SecondaryType;
+	[SerializeField] public uint Level;
+	[SerializeField] public float BaseExperiencePointsToNextLevel;
+	[SerializeField] public float ExperiencePointsToNextLevel;
+	[SerializeField] public float ExperiencePoints;
+	[SerializeField] public uint HealthPointsLearned;
+	[SerializeField] public uint AttackLearned;
+	[SerializeField] public uint SpecialAttackLearned;
+	[SerializeField] public uint DefenceLearned;
+	[SerializeField] public uint SpecialDefenceLearned;
+	[SerializeField] public uint SpeedLearned;
+	[SerializeField] public uint StaminaLearned;
+	[SerializeField] public bool HasBeenSeen;
+	[SerializeField] public bool HasBeenCaught;
+	[SerializeField] public HoldItem HeldItem;
+	[SerializeField] public float ExperiencePointsWorth;
 
 	// Protected properties
-	protected float ExperiencePointsRequirementMultiplier { get; set; }
+	[SerializeField] protected float ExperiencePointsRequirementMultiplier;
+
+
 
 	// TODO: Add Available moves list and unknown moves
 

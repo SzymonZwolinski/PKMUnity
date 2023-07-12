@@ -1,9 +1,9 @@
 
 using UnityEngine;
 
+[CreateAssetMenu]
 public class FirstTestUnit : BaseUnit
 {
-	private static uint instanceCount = 0;
 	public FirstTestUnit(
 		uint id,
 		uint healthPoints,
@@ -61,23 +61,12 @@ public class FirstTestUnit : BaseUnit
 			experiencePointsWorth, 
 			experiencePointsRequirementMultiplier)
 	{
-		instanceCount++;
-	}
-
-	public FirstTestUnit()
-	{
-		BaseStats();
-		instanceCount++;
-	}
-
-	private void BaseStats()
-	{
 		Id = 0;
 		HealthPoints = 100;
 		Attack = 10;
 		SpecialAttack = 10;
 		Defence = 10;
-		SpecialDefence= 10;
+		SpecialDefence = 10;
 		Speed = 10;
 		Stamina = 100;
 		IsAlive = true;
@@ -87,22 +76,48 @@ public class FirstTestUnit : BaseUnit
 		BaseExperiencePointsToNextLevel = 100;
 		ExperiencePointsToNextLevel = BaseExperiencePointsToNextLevel;
 		ExperiencePoints = 0;
-		HealthPointsLearned= 0;
-		AttackLearned= 0;
-		SpecialAttackLearned	= 0;
-		DefenceLearned= 0;
-		SpecialDefenceLearned= 0;
-		SpeedLearned= 0;
-		StaminaLearned= 0;
-		HasBeenSeen= true;
-		HasBeenCaught= false;
+		HealthPointsLearned = 0;
+		AttackLearned = 0;
+		SpecialAttackLearned = 0;
+		DefenceLearned = 0;
+		SpecialDefenceLearned = 0;
+		SpeedLearned = 0;
+		StaminaLearned = 0;
+		HasBeenSeen = true;
+		HasBeenCaught = false;
 		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
 	}
 
-	public uint GetInstanceCount()
+	public FirstTestUnit()
 	{
-		return instanceCount;
+		Id = 0;
+		HealthPoints = 100;
+		Attack = 10;
+		SpecialAttack = 10;
+		Defence = 10;
+		SpecialDefence = 10;
+		Speed = 10;
+		Stamina = 100;
+		IsAlive = true;
+		FirstType = Types.Fire;
+		SecondaryType = null;
+		Level = 5;
+		BaseExperiencePointsToNextLevel = 100;
+		ExperiencePointsToNextLevel = BaseExperiencePointsToNextLevel;
+		ExperiencePoints = 0;
+		HealthPointsLearned = 0;
+		AttackLearned = 0;
+		SpecialAttackLearned = 0;
+		DefenceLearned = 0;
+		SpecialDefenceLearned = 0;
+		SpeedLearned = 0;
+		StaminaLearned = 0;
+		HasBeenSeen = true;
+		HasBeenCaught = false;
+		HeldItem = null;
+		ExperiencePointsWorth = 10;
+		ExperiencePointsRequirementMultiplier = 1.1f;
 	}
 }
