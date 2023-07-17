@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 public class UnitSpawnField : MonoBehaviour
@@ -30,6 +31,8 @@ public class UnitSpawnField : MonoBehaviour
 		}
 	}
 
+
+
 	private void Update()
 	{
 		if (triggerActive && PlayerCollider.transform.position != LastPlayerPosition)
@@ -37,19 +40,23 @@ public class UnitSpawnField : MonoBehaviour
 			Debug.Log("jestw");
 			if (UnityEngine.Random.Range(0, 100) == 1)
 			{
-				SpawnUnit();
+				var myUnit = new FirstTestUnit();
+				SpawnUnit(myUnit);
 			}
 
 			LastPlayerPosition = PlayerCollider.transform.position;
 		}
 	}
 
-	private void SpawnUnit()
+	private void SpawnUnit(BaseUnit unitToSpawn)
 	{
 		// TODO: Spawn a box and assign myUnitClass to it
-		var myUnit = new FirstTestUnit();
+		
 
 		var box = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		box.AddComponent<StatHolder>()
+			.UnitStats = unitToSpawn;
+
 		
 	}
 
