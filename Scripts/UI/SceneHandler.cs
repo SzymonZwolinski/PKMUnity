@@ -1,24 +1,55 @@
-using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
+    private Scene MainScene;
 
-    public void UnloadBattleScene()
+	private void Start()
+	{
+		MainScene = SceneManager.GetSceneByName(SceneNames.v1.ToString());
+	}
+
+	public void UnloadBattleScene()
     {
-        SceneManager.UnloadSceneAsync(SceneNames.BattleScene.ToString());
-    }
+        CheckIfMainSceneIsInitalized();
+		EnableMainSceneObjects();
+
+		var unloadSceneAsycnTask =
+            SceneManager.UnloadSceneAsync(SceneNames.BattleScene.ToString());
+	}
 
     public void LoadBattleSceneAsync()
     {
-        var currentScene = SceneManager.GetActiveScene();
-        AsyncOperation async = SceneManager.LoadSceneAsync(SceneNames.BattleScene.ToString(), LoadSceneMode.Additive);
+        CheckIfMainSceneIsInitalized();
 
-        GameObject[] rootObjects = currentScene.GetRootGameObjects();
-        foreach (GameObject obj in rootObjects)
-        {
-            obj.SetActive(false);
-        }
+		var loadSceneAsyncTask = 
+            SceneManager.LoadSceneAsync(SceneNames.BattleScene.ToString(), LoadSceneMode.Additive);
+
+        DisableMainSceneObjects();
     }
+
+	private void DisableMainSceneObjects()
+	    => MainScene.GetRootGameObjects().ToList().ForEach(x => x.SetActive(false));
+
+    private void EnableMainSceneObjects()
+        => MainScene.GetRootGameObjects().ToList().ForEach(x => x.SetActive(true));
+
+    private void CheckIfMainSceneIsInitalized()
+    {
+        if(MainScene != null) 
+        {
+            return;
+        }
+
+        MainScene = SceneManager.GetSceneByName(SceneNames.v1.ToString());
+	}
+
+    /*private void InitalizeMainSceneProperties()
+    {
+		var currentScene = SceneManager.GetActiveScene();
+        
+		rootObjects = mainScene.GetRootGameObjects().ToList();
+	}*/
 }
