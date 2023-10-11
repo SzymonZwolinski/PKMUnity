@@ -54,6 +54,7 @@ namespace asd
 			asd.SceneChanger.LoadBattleSceneAsync(SceneManager.GetActiveScene());
 
 			var box = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			box.gameObject.tag = "Enemy";
 			box.AddComponent<StatHolder>()
 				.UnitStats = unitToSpawn;
 

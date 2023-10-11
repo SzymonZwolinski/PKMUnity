@@ -647,9 +647,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1827856692}
+      - m_Target: {fileID: 11500000, guid: d20e4e177b86a2843805dd3894f41b42, type: 3}
         m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
-        m_MethodName: UnloadBattleScene
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -985,6 +985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827856691}
   - component: {fileID: 1827856692}
+  - component: {fileID: 1827856693}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -1019,6 +1020,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a038a22dddd3e3d40a44f9a15156b5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1827856693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827856690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c459e339510bfd6438cf66c5461570a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyName: {fileID: 144968678}
+  EnemyHealthPoints: {fileID: 902181406}
+  Name: {fileID: 0}
+  HealthPoints: {fileID: 0}
+  FirstMove: {fileID: 0}
+  SecondMove: {fileID: 0}
+  ThirdMove: {fileID: 0}
+  FourthMove: {fileID: 0}
 --- !u!1 &1946746094
 GameObject:
   m_ObjectHideFlags: 0

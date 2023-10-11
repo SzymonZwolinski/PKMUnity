@@ -6,6 +6,8 @@ public abstract class BaseUnit : ScriptableObject
 	// Public properties
 	public uint Id;
 	[SerializeField] public Guid UniqueId;
+	[SerializeField] public string Name;
+	[SerializeField] public uint MaxHealthPoints;
 	[SerializeField] public uint HealthPoints;
 	[SerializeField] public uint Attack;
 	[SerializeField] public uint SpecialAttack;

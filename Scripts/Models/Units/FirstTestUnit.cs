@@ -93,6 +93,8 @@ public class FirstTestUnit : BaseUnit
 	public FirstTestUnit()
 	{
 		Id = 0;
+		Name = nameof(FirstTestUnit);
+		MaxHealthPoints = 100;
 		HealthPoints = 100;
 		Attack = 10;
 		SpecialAttack = 10;
