@@ -4,8 +4,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class FirstTestUnit : BaseUnit
 {
+	
 	public FirstTestUnit(
-		uint id,
 		uint healthPoints,
 		uint attack,
 		uint specialAttack,
@@ -33,7 +33,6 @@ public class FirstTestUnit : BaseUnit
 		float experiencePointsWorth,
 		float experiencePointsRequirementMultiplier) 
 		: base(
-			id,
 			healthPoints,
 			attack,
 			specialAttack,
@@ -61,7 +60,6 @@ public class FirstTestUnit : BaseUnit
 			experiencePointsWorth, 
 			experiencePointsRequirementMultiplier)
 	{
-		Id = 0;
 		HealthPoints = 100;
 		Attack = 10;
 		SpecialAttack = 10;
@@ -92,7 +90,6 @@ public class FirstTestUnit : BaseUnit
 
 	public FirstTestUnit()
 	{
-		Id = 0;
 		Name = nameof(FirstTestUnit);
 		MaxHealthPoints = 100;
 		HealthPoints = 100;

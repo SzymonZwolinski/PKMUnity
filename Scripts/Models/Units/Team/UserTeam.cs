@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UserTeam
+public class UserTeam : MonoBehaviour
 {
 	private readonly short MaxTeamSize = 5; // = 6 bcs list is iterating from 0
 
-	public List<BaseUnit> Team;
-	public List<BaseUnit> Storage;
+	public List<BaseUnit> Team = new List<BaseUnit>();
+	public List<BaseUnit> Storage = new List<BaseUnit>();
 
 	public void AddToTeamOrStorage(BaseUnit unit)
 	{
@@ -19,6 +19,7 @@ public class UserTeam
 		}
 
 		Team.Add(unit);
+		Debug.Log(Team.Count);
 	}
 
 	public void RemoveFromTeam(BaseUnit unit)

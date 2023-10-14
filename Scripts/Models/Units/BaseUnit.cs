@@ -3,8 +3,9 @@ using UnityEngine;
 
 public abstract class BaseUnit : ScriptableObject
 {
+	private static uint instanceCounter = 0;
 	// Public properties
-	public uint Id;
+	public uint Id = instanceCounter++;
 	[SerializeField] public Guid UniqueId;
 	[SerializeField] public string Name;
 	[SerializeField] public uint MaxHealthPoints;
@@ -52,7 +53,6 @@ public abstract class BaseUnit : ScriptableObject
 	}
 
 	protected BaseUnit(
-		uint id,
 		uint healthPoints,
 		uint attack,
 		uint specialAttack, 
@@ -81,7 +81,6 @@ public abstract class BaseUnit : ScriptableObject
 		float experiencePointsRequirementMultiplier)
 	{
 		UniqueId = Guid.NewGuid();
-		Id = id;
 		HealthPoints = healthPoints;
 		Attack = attack;
 		SpecialAttack = specialAttack;
