@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 943104463}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -647,8 +647,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1434252800}
-        m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
-        m_MethodName: LoadBattleSceneAsync
+        m_TargetAssemblyTypeName: AddFirstUnit, Assembly-CSharp
+        m_MethodName: AddFirstUnitToPlayerTeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -705,6 +705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236981621}
+  - component: {fileID: 1236981622}
   m_Layer: 0
   m_Name: Team
   m_TagString: Untagged
@@ -727,6 +728,20 @@ Transform:
   m_Father: {fileID: 864798823}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1236981622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236981620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2195845bc9ed222458f554aa532a3621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: []
+  Storage: []
 --- !u!1 &1278062795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,7 +1128,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1434252798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a038a22dddd3e3d40a44f9a15156b5d3, type: 3}
+  m_Script: {fileID: 11500000, guid: cd8086cfbf4ef484792b31412cb334b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1712388867

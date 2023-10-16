@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,16 +29,30 @@ namespace asd
 			var loadSceneAsyncTask =
 				SceneManager.LoadSceneAsync(SceneNames.BattleScene.ToString(), LoadSceneMode.Additive);
 
-			DisableMainSceneObjects();
+			DisableMainSceneObjectsExceptPlayer();
 			Debug.Log(MainScene.GetRootGameObjects().ToString());
 			Debug.Log("Scene should be loaded, and objects on main scene disabled");
 		}
 
-		private static void DisableMainSceneObjects()
-			=> MainScene.GetRootGameObjects().ToList().ForEach(x => x.SetActive(false));
+		private static void DisableMainSceneObjectsExceptPlayer()
+		{
+			var rootObjects = MainScene.GetRootGameObjects();
+
+			foreach (var obj in rootObjects)
+			{
+				if (!obj.CompareTag("Player"))
+				{
+					obj.SetActive(false);
+				}
+			}
+		}
 
 		private static void EnableMainSceneObjects()
-			=> MainScene.GetRootGameObjects().ToList().ForEach(x => x.SetActive(true));
+			=> MainScene
+			.GetRootGameObjects()
+			.Where(x => !x.CompareTag("Player"))
+			.ToList()
+			.ForEach(x => x.SetActive(true));
 
 		private static void InitalizeMainScene(Scene sceneToLoad)
 		{
