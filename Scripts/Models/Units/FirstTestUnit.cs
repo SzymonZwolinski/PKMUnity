@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -118,5 +119,10 @@ public class FirstTestUnit : BaseUnit
 		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
+		FirstAttack = Attacks.GetAttack("Bite");
+		SecondAttack = Attacks.GetAttack("MagicBolt");
+		ThirdAttack = Attacks.GetAttack("Poison");
+		FourthAttack = null;
+		AvailibleAttacks = new List<string> { "_", "Bite", "MagicBolt", "Poison" };
 	}
 }

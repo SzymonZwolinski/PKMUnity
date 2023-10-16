@@ -15,20 +15,21 @@ public class PlayerTeamHandler : MonoBehaviour
 	{
 		Player = GameObject.FindGameObjectWithTag("Player");
 		var userTeam = Player.GetComponentInChildren<UserTeam>();
+
 		CurrentPlayerUnit = userTeam.Team.FirstOrDefault();
+
 		UpdateNameBar();
 		UpdateHealtBar();
 	}
 
 	private void UpdateNameBar()
 	{
-		var playerUnitStats = CurrentPlayerUnit.GetComponent<StatHolder>().UnitStats;
-		PlayerTeamUnitNameBar.text = playerUnitStats.Name;
+		
+		PlayerTeamUnitNameBar.text = CurrentPlayerUnit.Name;
 	}
 
 	private void UpdateHealtBar()
 	{
-		var playerUnitStats = CurrentPlayerUnit.GetComponent<StatHolder>().UnitStats;
-		PlayerTeamUnitHealtBar.text = $"{playerUnitStats.HealthPoints}/{playerUnitStats.MaxHealthPoints}";
+		PlayerTeamUnitHealtBar.text = $"{CurrentPlayerUnit.HealthPoints}/{CurrentPlayerUnit.MaxHealthPoints}";
 	}
 }

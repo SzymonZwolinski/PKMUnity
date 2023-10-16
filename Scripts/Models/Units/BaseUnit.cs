@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BaseUnit : ScriptableObject
@@ -38,13 +39,11 @@ public abstract class BaseUnit : ScriptableObject
 	// Protected properties
 	[SerializeField] protected float ExperiencePointsRequirementMultiplier;
 
-
-
-	// TODO: Add Available moves list and unknown moves
-
-	// Private fields
-
-
+	[SerializeField] public AttackModel FirstAttack;
+	[SerializeField] public AttackModel SecondAttack;
+	[SerializeField] public AttackModel ThirdAttack;
+	[SerializeField] public AttackModel FourthAttack;
+	protected List<string> AvailibleAttacks = new List<string>(); //TODO: Change this to some enum later
 	// Constructors
 
 	protected BaseUnit()
