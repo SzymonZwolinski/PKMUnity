@@ -10,7 +10,9 @@ namespace asd
 	public class UnitSpawnField : MonoBehaviour
 	{
 		public List<int> spawnableUnits = new List<int>(); // TODO: Add some static factory to create units based on int Id 
+
 		private int oddsToSpawnUnit = 1; // That means 1 unit per 100 ticks. Right now assume that every unit has exact spawn chance
+
 		[SerializeField]
 		private bool triggerActive = false;
 		private Vector3 LastPlayerPosition;
@@ -55,6 +57,10 @@ namespace asd
 
 			var box = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			box.gameObject.tag = "Enemy";
+
+			box.AddComponent<UnitTypeMarker>()
+				.UnitType = unitToSpawn;
+
 			box.AddComponent<StatHolder>()
 				.UnitStats = unitToSpawn;
 
