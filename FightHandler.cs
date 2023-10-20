@@ -49,7 +49,7 @@ public static class FightHandler
 		}
 	}  
 
-	private static void DealDamage(uint damage, BaseUnit unitThatTakesDamage)
+	private static void DealDamage(int damage, BaseUnit unitThatTakesDamage)
 	{
 		unitThatTakesDamage.HealthPoints -= damage;
 	}
@@ -84,7 +84,7 @@ public static class FightHandler
 	private static long CalculateSpeed(AttackModel attack, BaseUnit unit)
 	=> ((int)attack.Priority * 100) + (unit.Speed / 100);
 
-	private static uint CalculateAttackStats(AttackModel playerAttack,	BaseUnit PlayerUnit)
+	private static int CalculateAttackStats(AttackModel playerAttack,	BaseUnit PlayerUnit)
 	{
 		
 		var successfulAttack = CalculateAttackSuccess(playerAttack);
@@ -119,9 +119,9 @@ public static class FightHandler
 				false;
 	}
 
-	private static uint CalculateSpecialDamage(AttackModel attack, BaseUnit unit)
-		=> attack.Damage + (unit.SpecialAttack / 10);
+	private static int CalculateSpecialDamage(AttackModel attack, BaseUnit unit)
+		=> (int)(attack.Damage + (unit.SpecialAttack / 10));
 
-	private static uint CalculatePhysicalDamage(AttackModel attack, BaseUnit unit)
-		=> attack.Damage + (unit.Attack / 10);
+	private static int CalculatePhysicalDamage(AttackModel attack, BaseUnit unit)
+		=> (int)(attack.Damage + (unit.Attack / 10));
 }

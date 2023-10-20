@@ -9,8 +9,8 @@ public abstract class BaseUnit : ScriptableObject
 	public uint Id = instanceCounter++;
 	[SerializeField] public Guid UniqueId;
 	[SerializeField] public string Name;
-	[SerializeField] public uint MaxHealthPoints;
-	[SerializeField] public uint HealthPoints;
+	[SerializeField] public int MaxHealthPoints;
+	[SerializeField] public int HealthPoints;
 	[SerializeField] public uint Attack;
 	[SerializeField] public uint SpecialAttack;
 	[SerializeField] public uint Defence;
@@ -52,7 +52,7 @@ public abstract class BaseUnit : ScriptableObject
 	}
 
 	protected BaseUnit(
-		uint healthPoints,
+		int healthPoints,
 		uint attack,
 		uint specialAttack, 
 		uint defence, 
@@ -80,6 +80,7 @@ public abstract class BaseUnit : ScriptableObject
 		float experiencePointsRequirementMultiplier)
 	{
 		UniqueId = Guid.NewGuid();
+		MaxHealthPoints = healthPoints;
 		HealthPoints = healthPoints;
 		Attack = attack;
 		SpecialAttack = specialAttack;

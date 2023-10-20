@@ -10,20 +10,22 @@ public class StatsUpdate : MonoBehaviour
 	public Text EnemyName;
 	public Text EnemyHealthPoints;
 
-	/*//User
-	public Text Name;
-	public Text HealthPoints;
-	public Button FirstMove;
-	public Button SecondMove;
-	public Button ThirdMove;
-	public Button FourthMove;*/
-
 	void OnEnable()
 	{
 		var enemy = GameObject.FindGameObjectWithTag("Enemy");
 		//var userTeam = GameObject.FindGameObjectsWithTag("Ally");
 
 		InitalizeEnemyPanel(enemy);
+	}
+
+	public void UpdateEnemyPanel()
+	{
+		var enemyStats = GameObject.FindGameObjectWithTag("Enemy")
+			.GetComponent<StatHolder>()
+			.UnitStats; ;
+
+		EnemyName.text = enemyStats.Name;
+		EnemyHealthPoints.text = $"{enemyStats.HealthPoints}/{enemyStats.MaxHealthPoints}";
 	}
 
 	private void InitalizeEnemyPanel(GameObject enemy)

@@ -7,11 +7,6 @@ public class FightingUIHandler : MonoBehaviour
 
     private GameObject CurrentActivePanel;
 
-	private void OnEnable()
-	{
-        CurrentActivePanel = MainPanel;
-	}
-
 	public void ActivateFightingPanel()
     {
         MainPanel.SetActive(false);

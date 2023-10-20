@@ -20,7 +20,7 @@ namespace asd
 
 		public void OnTriggerEnter(Collider playerCollider)
 		{
-			if (playerCollider.CompareTag("Player"))
+			if (playerCollider.CompareTag("PlayerModel"))
 			{
 				triggerActive = true;
 				PlayerCollider = playerCollider;
@@ -30,7 +30,7 @@ namespace asd
 
 		public void OnTriggerExit(Collider other)
 		{
-			if (other.CompareTag("Player"))
+			if (other.CompareTag("PlayerModel"))
 			{
 				triggerActive = false;
 			}
@@ -53,7 +53,7 @@ namespace asd
 		private void SpawnUnit(BaseUnit unitToSpawn)
 		{
 			// TODO: Spawn a box and assign myUnitClass to it
-			asd.SceneChanger.LoadBattleSceneAsync(SceneManager.GetActiveScene());
+			asd.SceneChanger.LoadBattleSceneAsync(SceneManager.GetActiveScene(), LastPlayerPosition);
 
 			var box = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			box.gameObject.tag = "Enemy";
@@ -63,8 +63,6 @@ namespace asd
 
 			box.AddComponent<StatHolder>()
 				.UnitStats = unitToSpawn;
-
-
 		}
 
 		//TODO: Add instafight and despawn method

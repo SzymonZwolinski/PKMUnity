@@ -1,7 +1,7 @@
 public class AttackModel 
 {
 	public string Name;
-    public uint Damage;
+    public int Damage;
     public uint Accuracy;
 	public Types Type;
     public AttackPriority Priority;
@@ -10,7 +10,7 @@ public class AttackModel
 
 	public AttackModel(
 		string name,
-		uint damage,
+		int damage,
 		uint accuracy,
 		Types type,
 		AttackPriority priority,

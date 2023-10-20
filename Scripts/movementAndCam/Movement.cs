@@ -13,6 +13,8 @@ public class Movement : MonoBehaviour
 	private Transform mainCameraTransform; // Transform kamery
 	private Vector3 initialCameraForward; // Pocz¹tkowy wektor kierunku kamery
 
+	private bool IsMovementFrozen = false;
+
 	private void Start()
 	{
 		controller = GetComponent<CharacterController>();
@@ -27,36 +29,49 @@ public class Movement : MonoBehaviour
 
 	private void HandleMovement()
 	{
-		groundedPlayer = controller.isGrounded;
-		if (groundedPlayer && playerVelocity.y < 0)
+		if (!IsMovementFrozen)
 		{
-			playerVelocity.y = 0f;
+			groundedPlayer = controller.isGrounded;
+			if (playerVelocity.y < 0)
+			{
+				playerVelocity.y = 0f;
+			}
+
+			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+			move = Quaternion.LookRotation(initialCameraForward) * move; // Transformacja wektora ruchu wzglêdem kierunku kamery
+
+			float currentSpeed = playerSpeed;
+			if (Input.GetKey(KeyCode.LeftShift))
+			{
+				currentSpeed *= sprintMultiplier; // Przyœpieszenie przy wciœniêtym lewym Shift
+			}
+
+			controller.Move(move * Time.deltaTime * currentSpeed);
+
+			if (move != Vector3.zero)
+			{
+				gameObject.transform.forward = move;
+			}
+
+			// Zmiana wysokoœci gracza
+			if (Input.GetButtonDown("Jump") && groundedPlayer)
+			{
+				playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+			}
+
+			playerVelocity.y += gravityValue * Time.deltaTime;
+			controller.Move(playerVelocity * Time.deltaTime);
 		}
+	}
 
-		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	public void FreezeMovement()
+	{
+		IsMovementFrozen = true;
+	}
 
-		move = Quaternion.LookRotation(initialCameraForward) * move; // Transformacja wektora ruchu wzglêdem kierunku kamery
-
-		float currentSpeed = playerSpeed;
-		if (Input.GetKey(KeyCode.LeftShift))
-		{
-			currentSpeed *= sprintMultiplier; // Przyœpieszenie przy wciœniêtym lewym Shift
-		}
-
-		controller.Move(move * Time.deltaTime * currentSpeed);
-
-		if (move != Vector3.zero)
-		{
-			gameObject.transform.forward = move;
-		}
-
-		// Zmiana wysokoœci gracza
-		if (Input.GetButtonDown("Jump") && groundedPlayer)
-		{
-			playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-		}
-
-		playerVelocity.y += gravityValue * Time.deltaTime;
-		controller.Move(playerVelocity * Time.deltaTime);
+	public void UnFreezeMovement()
+	{
+		IsMovementFrozen = false;
 	}
 }

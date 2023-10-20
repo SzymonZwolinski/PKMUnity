@@ -9,10 +9,7 @@ namespace asd
 	{
 		private static Scene MainScene;
 
-		/*private void Start()
-		{
-			MainScene = SceneManager.GetSceneByName(SceneNames.v1.ToString());
-		}*/
+		private static Vector3 LastPlayerPositionBeforeChangingScene; //to make sure player will return to its original position
 
 		public static void UnloadBattleScene()
 		{
@@ -20,18 +17,20 @@ namespace asd
 
 			var unloadSceneAsycnTask =
 				SceneManager.UnloadSceneAsync(SceneNames.BattleScene.ToString());
+			UnFreezePlayerMovement();
+
 		}
 
-		public static void LoadBattleSceneAsync(Scene sceneToLoad)
+		public static void LoadBattleSceneAsync(Scene sceneToLoad, Vector3 lastPlayerPos)
 		{
 			InitalizeMainScene(sceneToLoad);
+			InitalizeLastUserPosition(lastPlayerPos);
+			FreezePlayerMovement();
 
 			var loadSceneAsyncTask =
 				SceneManager.LoadSceneAsync(SceneNames.BattleScene.ToString(), LoadSceneMode.Additive);
 
 			DisableMainSceneObjectsExceptPlayer();
-			Debug.Log(MainScene.GetRootGameObjects().ToString());
-			Debug.Log("Scene should be loaded, and objects on main scene disabled");
 		}
 
 		private static void DisableMainSceneObjectsExceptPlayer()
@@ -54,9 +53,24 @@ namespace asd
 			.ToList()
 			.ForEach(x => x.SetActive(true));
 
+		private static void FreezePlayerMovement()
+		{
+			GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Movement>().FreezeMovement();			
+		}
+
+		private static void UnFreezePlayerMovement()
+		{
+			GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Movement>().UnFreezeMovement();
+		}
+
 		private static void InitalizeMainScene(Scene sceneToLoad)
 		{
 			MainScene = sceneToLoad;
+		}
+
+		private static void InitalizeLastUserPosition(Vector3 lastUserPos)
+		{
+			LastPlayerPositionBeforeChangingScene = lastUserPos;
 		}
 	}
 }

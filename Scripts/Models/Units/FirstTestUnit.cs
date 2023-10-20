@@ -7,7 +7,7 @@ public class FirstTestUnit : BaseUnit
 {
 	
 	public FirstTestUnit(
-		uint healthPoints,
+		int healthPoints,
 		uint attack,
 		uint specialAttack,
 		uint defence,

@@ -13,6 +13,11 @@ public class PlayerTeamHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
+		UpdatePlayerPanel();
+	}
+
+	public void UpdatePlayerPanel()
+	{
 		Player = GameObject.FindGameObjectWithTag("Player");
 		var userTeam = Player.GetComponentInChildren<UserTeam>();
 
