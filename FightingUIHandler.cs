@@ -4,6 +4,7 @@ public class FightingUIHandler : MonoBehaviour
 {
     public GameObject MainPanel;
     public GameObject FightingPanel;
+    public GameObject ItemPanel;
 
     private GameObject CurrentActivePanel;
 
@@ -14,6 +15,14 @@ public class FightingUIHandler : MonoBehaviour
 
         CurrentActivePanel = FightingPanel;
     }
+
+    public void ActivateItemPanel()
+    {
+		MainPanel.SetActive(false);
+		ItemPanel.SetActive(true);
+
+		CurrentActivePanel = ItemPanel;
+	}    
 
     public void ActivateMainPanel()
     {        
