@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class CaptureEnemy 
 {
-    private static int CurrentAmountOfTries;
+    private static int CurrentAmountOfTries = 1;
 
     public static bool TryToCapture(BaseUnit playerUnit, BaseUnit enemyUnit)
     {
@@ -22,12 +22,15 @@ public static class CaptureEnemy
 
         if (isSuccess) 
         {
+            Debug.Log("Succesfully catched");
             GameObject.FindGameObjectWithTag("Player")
                 .GetComponentInChildren<UserTeam>()
                 .AddToTeamOrStorage(enemyUnit);
-            CurrentAmountOfTries = 0;
+            CurrentAmountOfTries = 1;
             return isSuccess;
         }
+
+        Debug.Log("Failed to catch");
 
         CurrentAmountOfTries++;
         return isSuccess;

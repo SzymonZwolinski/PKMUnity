@@ -15,10 +15,18 @@ namespace asd
 		{
 			EnableMainSceneObjects();
 
+			DestroyEnemyModels();
 			var unloadSceneAsycnTask =
 				SceneManager.UnloadSceneAsync(SceneNames.BattleScene.ToString());
 			UnFreezePlayerMovement();
 
+		}
+		
+		private static void DestroyEnemyModels()
+		{
+			var objToDestroy = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+
+			objToDestroy.ForEach(x => GameObject.Destroy(x));
 		}
 
 		public static void LoadBattleSceneAsync(Scene sceneToLoad, Vector3 lastPlayerPos)

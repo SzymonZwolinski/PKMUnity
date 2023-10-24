@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class FightHandler
 {
-	private static uint Turn = 1;
+	public static uint Turn = 1;
 
 	public static void Attack(
 		AttackModel playerAttack,
@@ -12,7 +12,7 @@ public static class FightHandler
 		BaseUnit enemyUnit)
 	{
 		var enemyAttack = GetEnemyAttack(enemyUnit);
-		var enemyTurnDamage = CalculateAttackStats(playerAttack, enemyUnit);
+		var enemyTurnDamage = CalculateAttackStats(enemyAttack, enemyUnit);
 
 		var playerTurnDamage = CalculateAttackStats(playerAttack, playerUnit);
 
@@ -47,7 +47,16 @@ public static class FightHandler
 			Turn = 1;
 			SceneChanger.UnloadBattleScene();
 		}
-	}  
+	}
+
+	public static void EnemyOnlyAttack(BaseUnit enemyUnit, BaseUnit playerUnit)
+	{
+		var enemyAttack = GetEnemyAttack(enemyUnit);
+		var enemyTurnDamage = CalculateAttackStats(enemyAttack, enemyUnit);
+
+		DealDamage(enemyTurnDamage, playerUnit);
+		Turn++;
+	}
 
 	private static void DealDamage(int damage, BaseUnit unitThatTakesDamage)
 	{
@@ -84,7 +93,7 @@ public static class FightHandler
 	private static long CalculateSpeed(AttackModel attack, BaseUnit unit)
 	=> ((int)attack.Priority * 100) + (unit.Speed / 100);
 
-	private static int CalculateAttackStats(AttackModel playerAttack,	BaseUnit PlayerUnit)
+	private static int CalculateAttackStats(AttackModel playerAttack, BaseUnit PlayerUnit)
 	{
 		
 		var successfulAttack = CalculateAttackSuccess(playerAttack);

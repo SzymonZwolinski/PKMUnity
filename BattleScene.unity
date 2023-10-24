@@ -411,13 +411,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1827856696}
+        m_TargetAssemblyTypeName: CaptureEnemyHandler, Assembly-CSharp
+        m_MethodName: TryToCaptureEnemy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3311,6 +3311,7 @@ GameObject:
   - component: {fileID: 1827856693}
   - component: {fileID: 1827856694}
   - component: {fileID: 1827856695}
+  - component: {fileID: 1827856696}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -3388,6 +3389,18 @@ MonoBehaviour:
   MainPanel: {fileID: 1602848695}
   FightingPanel: {fileID: 1005321991}
   ItemPanel: {fileID: 2064293070}
+--- !u!114 &1827856696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827856690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d4e2ae0a8b02c4d94c6bbaaabdb869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946746094
 GameObject:
   m_ObjectHideFlags: 0
