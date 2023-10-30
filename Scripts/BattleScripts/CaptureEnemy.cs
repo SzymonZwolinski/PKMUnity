@@ -41,10 +41,10 @@ public static class CaptureEnemy
         var firstRandomNumber = Random.Range(0, 255);
         var secondRandomNumber = Random.Range(0, 255);
 
-        return Mathf.Abs(((enemyUnit.MaxHealthPoints + firstRandomNumber) *
-            (secondRandomNumber + CurrentAmountOfTries)) /
+        return Mathf.Abs((float)((enemyUnit.MaxHealthPoints + firstRandomNumber) *
+            (secondRandomNumber + CurrentAmountOfTries) /
             ((enemyUnit.HealthPoints + levelDiff) * 
-            Mathf.Abs(CurrentAmountOfTries))) > 1;
+            Mathf.Abs(CurrentAmountOfTries)))) > 1;
     }
 
     private static bool CalculateChanceForEqual(BaseUnit enemyUnit) 
@@ -52,8 +52,8 @@ public static class CaptureEnemy
 		var firstRandomNumber = Random.Range(0, 255);
 		var secondRandomNumber = Random.Range(0, 255);
 
-        return Mathf.Abs(((enemyUnit.MaxHealthPoints + firstRandomNumber) *
-            (secondRandomNumber + CurrentAmountOfTries)) /
-            ((enemyUnit.HealthPoints) * Mathf.Abs(CurrentAmountOfTries))) > 1;
+		return Mathf.Abs((float)((enemyUnit.MaxHealthPoints + firstRandomNumber) *
+            (secondRandomNumber + CurrentAmountOfTries) /
+            ((enemyUnit.HealthPoints) * Mathf.Abs(CurrentAmountOfTries)))) > 1;
 	}
 }

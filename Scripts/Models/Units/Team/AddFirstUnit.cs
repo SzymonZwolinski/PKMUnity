@@ -12,8 +12,6 @@ public class AddFirstUnit : MonoBehaviour
 
 		var firstUnit = PrepareFirstUnit();
 
-		Debug.Log(userTeam);
-
 		userTeam.AddToTeamOrStorage(firstUnit);
 	}
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public static class Attacks 
+public static class AttacsFactory 
 {
 	public static AttackModel GetAttack(string attackName)
 	{

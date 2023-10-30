@@ -9,8 +9,8 @@ public abstract class BaseUnit : ScriptableObject
 	public uint Id = instanceCounter++;
 	[SerializeField] public Guid UniqueId;
 	[SerializeField] public string Name;
-	[SerializeField] public int MaxHealthPoints;
-	[SerializeField] public int HealthPoints;
+	[SerializeField] public double MaxHealthPoints;
+	[SerializeField] public double HealthPoints;
 	[SerializeField] public uint Attack;
 	[SerializeField] public uint SpecialAttack;
 	[SerializeField] public uint Defence;

@@ -119,9 +119,9 @@ public class FirstTestUnit : BaseUnit
 		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
-		FirstAttack = Attacks.GetAttack("Bite");
-		SecondAttack = Attacks.GetAttack("MagicBolt");
-		ThirdAttack = Attacks.GetAttack("Poison");
+		FirstAttack = AttacsFactory.GetAttack("Bite");
+		SecondAttack = AttacsFactory.GetAttack("MagicBolt");
+		ThirdAttack = AttacsFactory.GetAttack("Poison");
 		FourthAttack = null;
 		AvailibleAttacks = new List<string> { "_", "Bite", "MagicBolt", "Poison" };
 	}

@@ -1,5 +1,4 @@
 using asd;
-using System.Text;
 using UnityEngine;
 
 public static class FightHandler
@@ -13,8 +12,20 @@ public static class FightHandler
 	{
 		var enemyAttack = GetEnemyAttack(enemyUnit);
 		var enemyTurnDamage = CalculateAttackStats(enemyAttack, enemyUnit);
-
+		enemyTurnDamage *= NatureWeaknessCalculator.CalculateDamageMultiplyer(
+			enemyAttack.Type,
+			playerUnit.FirstType,
+			playerUnit.SecondaryType,
+			enemyUnit.FirstType,
+			enemyUnit.SecondaryType);
+		
 		var playerTurnDamage = CalculateAttackStats(playerAttack, playerUnit);
+		playerTurnDamage *= NatureWeaknessCalculator.CalculateDamageMultiplyer(
+			enemyAttack.Type, 
+			enemyUnit.FirstType, 
+			enemyUnit.SecondaryType,
+			playerUnit.FirstType,
+			playerUnit.SecondaryType);
 
 		var executorOfFirstAttack = CalculateWhichAttackShouldBeFirstExecuted(
 			enemyAttack, 
@@ -58,7 +69,7 @@ public static class FightHandler
 		Turn++;
 	}
 
-	private static void DealDamage(int damage, BaseUnit unitThatTakesDamage)
+	private static void DealDamage(double damage, BaseUnit unitThatTakesDamage)
 	{
 		unitThatTakesDamage.HealthPoints -= damage;
 	}
@@ -90,10 +101,10 @@ public static class FightHandler
 		return enemySpeed > playerSpeed ? CharacterInBattleType.Enemy : CharacterInBattleType.Player;
 	}
 
-	private static long CalculateSpeed(AttackModel attack, BaseUnit unit)
-	=> ((int)attack.Priority * 100) + (unit.Speed / 100);
+	private static double CalculateSpeed(AttackModel attack, BaseUnit unit)
+	=> ((double)attack.Priority * 100) + (unit.Speed / 100);
 
-	private static int CalculateAttackStats(AttackModel playerAttack, BaseUnit PlayerUnit)
+	private static double CalculateAttackStats(AttackModel playerAttack, BaseUnit PlayerUnit)
 	{
 		
 		var successfulAttack = CalculateAttackSuccess(playerAttack);
@@ -128,9 +139,9 @@ public static class FightHandler
 				false;
 	}
 
-	private static int CalculateSpecialDamage(AttackModel attack, BaseUnit unit)
-		=> (int)(attack.Damage + (unit.SpecialAttack / 10));
+	private static double CalculateSpecialDamage(AttackModel attack, BaseUnit unit)
+		=> attack.Damage + (unit.SpecialAttack / 10);
 
-	private static int CalculatePhysicalDamage(AttackModel attack, BaseUnit unit)
-		=> (int)(attack.Damage + (unit.Attack / 10));
+	private static double CalculatePhysicalDamage(AttackModel attack, BaseUnit unit)
+		=> attack.Damage + (unit.Attack / 10);
 }
