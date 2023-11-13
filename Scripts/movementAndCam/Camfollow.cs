@@ -36,8 +36,16 @@ public class Camfollow : MonoBehaviour
 
 			var (rotationX, rotationY) = GetRotations(mouseDelta);
 
-			transform.RotateAround(target.position, Vector3.up, rotationY * rotationSpeed);
-			transform.RotateAround(target.position, transform.right, rotationX * rotationSpeed);
+			transform.RotateAround(
+				target.position, 
+				Vector3.up,
+				rotationY * rotationSpeed);
+			transform.RotateAround(
+				target.position, 
+				transform.right,
+				rotationX * rotationSpeed);
+
+			target.Rotate(Vector3.up, rotationY * rotationSpeed);
 
 			lastMousePosition = currentMousePosition;
 		}
@@ -53,7 +61,11 @@ public class Camfollow : MonoBehaviour
 	private void HandleMovement()
 	{
 		var targetPosition = target.position - transform.forward * followDistance;
-		transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
+		transform.position = Vector3.Lerp(
+			transform.position, 
+			targetPosition, 
+			Time.deltaTime * followSpeed);
+
 		transform.LookAt(target);
 	}
 }

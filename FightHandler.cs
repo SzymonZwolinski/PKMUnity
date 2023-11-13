@@ -1,4 +1,5 @@
 using asd;
+using System.Linq;
 using UnityEngine;
 
 public static class FightHandler
@@ -10,8 +11,15 @@ public static class FightHandler
 		BaseUnit playerUnit,
 		BaseUnit enemyUnit)
 	{
-		var enemyAttack = GetEnemyAttack(enemyUnit);
-		var enemyTurnDamage = CalculateAttackStats(enemyAttack, enemyUnit);
+		var enemyAttack = GetEnemyAttack(enemyUnit, playerUnit);
+
+		Debug.Log(enemyAttack);
+		
+		var enemyTurnDamage = CalculateAttackStats(
+			enemyAttack, 
+			enemyUnit,
+			playerUnit,
+			"enemy");
 		enemyTurnDamage *= NatureWeaknessCalculator.CalculateDamageMultiplyer(
 			enemyAttack.Type,
 			playerUnit.FirstType,
@@ -19,7 +27,11 @@ public static class FightHandler
 			enemyUnit.FirstType,
 			enemyUnit.SecondaryType);
 		
-		var playerTurnDamage = CalculateAttackStats(playerAttack, playerUnit);
+		var playerTurnDamage = CalculateAttackStats(
+			playerAttack, 
+			playerUnit, 
+			enemyUnit,
+			"player");
 		playerTurnDamage *= NatureWeaknessCalculator.CalculateDamageMultiplyer(
 			enemyAttack.Type, 
 			enemyUnit.FirstType, 
@@ -50,10 +62,8 @@ public static class FightHandler
 			}
 		}
 
-		Debug.Log("tura" + Turn);
-
 		Turn++;
-		if(enemyUnit.HealthPoints <= 0)
+		if(enemyUnit.HealthPoints <= 0 || playerUnit.HealthPoints <=0)
 		{
 			Turn = 1;
 			SceneChanger.UnloadBattleScene();
@@ -62,8 +72,12 @@ public static class FightHandler
 
 	public static void EnemyOnlyAttack(BaseUnit enemyUnit, BaseUnit playerUnit)
 	{
-		var enemyAttack = GetEnemyAttack(enemyUnit);
-		var enemyTurnDamage = CalculateAttackStats(enemyAttack, enemyUnit);
+		var enemyAttack = GetEnemyAttack(enemyUnit, playerUnit);
+		var enemyTurnDamage = CalculateAttackStats(
+			enemyAttack, 
+			enemyUnit,
+			playerUnit,
+			"enemy");
 
 		DealDamage(enemyTurnDamage, playerUnit);
 		Turn++;
@@ -74,13 +88,17 @@ public static class FightHandler
 		unitThatTakesDamage.HealthPoints -= damage;
 	}
 
-	private static AttackModel GetEnemyAttack(BaseUnit enemyUnit)
+	private static AttackModel GetEnemyAttack(BaseUnit enemyUnit, BaseUnit playerUnit)
 	{
-		return 
-			enemyUnit.FirstAttack ??
-			enemyUnit.SecondAttack ??
-			enemyUnit.ThirdAttack ??
-			enemyUnit.FourthAttack;
+		var chancesForMostOptimalAttack = Random.Range(0, 10);
+		var attacks = enemyUnit.GetAllAttacks();
+
+		return chancesForMostOptimalAttack > 3 ? 
+			NatureWeaknessCalculator.GetMostOptimalAttack(
+				enemyUnit, 
+				playerUnit,
+				attacks) :
+			attacks.First();
 	}
 
 	private static CharacterInBattleType CalculateWhichAttackShouldBeFirstExecuted(
@@ -98,15 +116,21 @@ public static class FightHandler
 			playerSpeed += Random.Range(0, 10);
 		}
 
-		return enemySpeed > playerSpeed ? CharacterInBattleType.Enemy : CharacterInBattleType.Player;
+		return enemySpeed > playerSpeed ?
+			CharacterInBattleType.Enemy :
+			CharacterInBattleType.Player;
 	}
 
 	private static double CalculateSpeed(AttackModel attack, BaseUnit unit)
 	=> ((double)attack.Priority * 100) + (unit.Speed / 100);
 
-	private static double CalculateAttackStats(AttackModel playerAttack, BaseUnit PlayerUnit)
+	private static double CalculateAttackStats(
+		AttackModel playerAttack,
+		BaseUnit PlayerUnit,
+		BaseUnit EnemyUnit,
+		string who)
 	{
-		
+		Debug.Log(who);
 		var successfulAttack = CalculateAttackSuccess(playerAttack);
 
 		if(!successfulAttack)
@@ -117,11 +141,17 @@ public static class FightHandler
 		switch (playerAttack.Kind)
 		{
 			case AttackKind.Special:
-				return CalculateSpecialDamage(playerAttack, PlayerUnit);
+				return CalculateSpecialDamage(
+					playerAttack,
+					PlayerUnit,
+					EnemyUnit);
 				
 
 			case AttackKind.Physical:
-				return CalculatePhysicalDamage(playerAttack, PlayerUnit);
+				return CalculatePhysicalDamage(
+					playerAttack,
+					PlayerUnit, 
+					EnemyUnit);
 
 			default:
 				return playerAttack.Damage;
@@ -131,7 +161,7 @@ public static class FightHandler
 	private static bool CalculateAttackSuccess(AttackModel attack)
 	{
 		var randomValue = Random.Range(0, 101);
-
+		
 		return attack.Accuracy == 100 ?
 			true : 
 			attack.Accuracy >= randomValue ?
@@ -139,9 +169,19 @@ public static class FightHandler
 				false;
 	}
 
-	private static double CalculateSpecialDamage(AttackModel attack, BaseUnit unit)
-		=> attack.Damage + (unit.SpecialAttack / 10);
+	private static double CalculateSpecialDamage(
+		AttackModel attack,
+		BaseUnit unit, 
+		BaseUnit enemyUnit)
+		=> (attack.Damage + (unit.SpecialAttack / 10) ) - enemyUnit.SpecialDefence > 0 ?
+		(attack.Damage + (unit.SpecialAttack / 10)) - enemyUnit.SpecialDefence : 
+		1;
 
-	private static double CalculatePhysicalDamage(AttackModel attack, BaseUnit unit)
-		=> attack.Damage + (unit.Attack / 10);
+	private static double CalculatePhysicalDamage(
+		AttackModel attack,
+		BaseUnit unit,
+		BaseUnit enemyUnit)
+		=> (attack.Damage + (unit.Attack / 10)) - enemyUnit.Defence > 0 ?
+		(attack.Damage + (unit.Attack / 10)) - enemyUnit.Defence :
+		1;
 }

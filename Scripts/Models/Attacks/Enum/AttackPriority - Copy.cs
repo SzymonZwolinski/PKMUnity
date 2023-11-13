@@ -1,8 +1,8 @@
 public enum AttackPriority 
 {
-	Fastest = 0,
-	Fast = 1,
-	Normal = 2,
-	Slow = 3,
-	Slowest = 4
+	Fastest = 5,
+	Fast = 4,
+	Normal = 3,
+	Slow = 2,
+	Slowest = 1
 }

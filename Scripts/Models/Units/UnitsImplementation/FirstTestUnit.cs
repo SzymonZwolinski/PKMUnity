@@ -32,7 +32,9 @@ public class FirstTestUnit : BaseUnit
 		bool hasBeenCaught,
 		HoldItem heldItem, 
 		float experiencePointsWorth,
-		float experiencePointsRequirementMultiplier) 
+		float experiencePointsRequirementMultiplier,
+		uint spawnRate,
+		string prefabPath) 
 		: base(
 			healthPoints,
 			attack,
@@ -59,7 +61,9 @@ public class FirstTestUnit : BaseUnit
 			hasBeenCaught, 
 			heldItem, 
 			experiencePointsWorth, 
-			experiencePointsRequirementMultiplier)
+			experiencePointsRequirementMultiplier,
+			spawnRate,
+			prefabPath)
 	{
 		HealthPoints = 100;
 		Attack = 10;
@@ -87,6 +91,8 @@ public class FirstTestUnit : BaseUnit
 		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
+		SpawnRate = spawnRate;
+		PrefabPath = prefabPath;
 	}
 
 	public FirstTestUnit()
@@ -124,5 +130,7 @@ public class FirstTestUnit : BaseUnit
 		ThirdAttack = AttacsFactory.GetAttack("Poison");
 		FourthAttack = null;
 		AvailibleAttacks = new List<string> { "_", "Bite", "MagicBolt", "Poison" };
+		SpawnRate = 1;
+		PrefabPath = "Slime_02";
 	}
 }

@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,9 +8,7 @@ namespace asd
 {
 	public class UnitSpawnField : MonoBehaviour
 	{
-		public List<int> spawnableUnits = new List<int>(); // TODO: Add some static factory to create units based on int Id 
-
-		private int oddsToSpawnUnit = 1; // That means 1 unit per 100 ticks. Right now assume that every unit has exact spawn chance
+		public List<UnitNames> spawnableUnits = new();
 
 		[SerializeField]
 		private bool triggerActive = false;
@@ -28,9 +25,9 @@ namespace asd
 			}
 		}
 
-		public void OnTriggerExit(Collider other)
+		public void OnTriggerExit(Collider playerCollider)
 		{
-			if (other.CompareTag("PlayerModel"))
+			if (playerCollider.CompareTag("PlayerModel"))
 			{
 				triggerActive = false;
 			}
@@ -38,12 +35,20 @@ namespace asd
 
 		private void Update()
 		{
-			if (triggerActive && PlayerCollider.transform.position != LastPlayerPosition)
+			if (triggerActive &&
+				PlayerCollider.transform.position != LastPlayerPosition)
 			{
-				if (UnityEngine.Random.Range(0, 100) == 1)
+				if (Random.Range(1, 101) == 1)
 				{
-					var myUnit = new FirstTestUnit();
-					SpawnUnit(myUnit);
+					var myUnit = UnitsFactory.GetUnit(
+						spawnableUnits[Random.Range(
+							0,
+							spawnableUnits.Count +1)]);
+
+					if (UnityEngine.Random.Range(1, 6) <= myUnit.SpawnRate)
+					{
+						SpawnUnit(myUnit);
+					}
 				}
 
 				LastPlayerPosition = PlayerCollider.transform.position;
@@ -52,19 +57,24 @@ namespace asd
 
 		private void SpawnUnit(BaseUnit unitToSpawn)
 		{
-			// TODO: Spawn a box and assign myUnitClass to it
-			asd.SceneChanger.LoadBattleSceneAsync(SceneManager.GetActiveScene(), LastPlayerPosition);
+			SceneChanger.LoadBattleSceneAsync(SceneManager.GetActiveScene(), LastPlayerPosition);
+			
+			var unitModel = Resources.Load(unitToSpawn.PrefabPath) as GameObject;
+			var spawnedUnit = GameObject.Instantiate(unitModel);
 
-			var box = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			box.gameObject.tag = "Enemy";
+			spawnedUnit.gameObject.tag = "Enemy";
 
-			box.AddComponent<UnitTypeMarker>()
+			spawnedUnit.AddComponent<UnitTypeMarker>()
 				.UnitType = unitToSpawn;
 
-			box.AddComponent<StatHolder>()
+			spawnedUnit.AddComponent<StatHolder>()
 				.UnitStats = unitToSpawn;
-		}
 
-		//TODO: Add instafight and despawn method
+			spawnedUnit.transform
+				.LookAt(
+					GameObject.FindWithTag("MainCamera")
+						.transform);
+		}
+			
 	}
 }

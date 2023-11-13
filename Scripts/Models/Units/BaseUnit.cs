@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class BaseUnit : ScriptableObject
@@ -35,6 +36,7 @@ public abstract class BaseUnit : ScriptableObject
 	[SerializeField] public bool HasBeenCaught;
 	[SerializeField] public HoldItem HeldItem;
 	[SerializeField] public float ExperiencePointsWorth;
+	[SerializeField] public uint SpawnRate;
 
 	// Protected properties
 	[SerializeField] protected float ExperiencePointsRequirementMultiplier;
@@ -44,6 +46,8 @@ public abstract class BaseUnit : ScriptableObject
 	[SerializeField] public AttackModel ThirdAttack;
 	[SerializeField] public AttackModel FourthAttack;
 	protected List<string> AvailibleAttacks = new List<string>(); //TODO: Change this to some enum later
+
+	[SerializeField] public string PrefabPath;
 	// Constructors
 
 	protected BaseUnit()
@@ -77,7 +81,9 @@ public abstract class BaseUnit : ScriptableObject
 		bool hasBeenCaught,
 		HoldItem heldItem,
 		float experiencePointsWorth,
-		float experiencePointsRequirementMultiplier)
+		float experiencePointsRequirementMultiplier,
+		uint spawnRate,
+		string prefabPath)
 	{
 		UniqueId = Guid.NewGuid();
 		MaxHealthPoints = healthPoints;
@@ -107,6 +113,8 @@ public abstract class BaseUnit : ScriptableObject
 		HeldItem = heldItem;
 		ExperiencePointsWorth = experiencePointsWorth;
 		ExperiencePointsRequirementMultiplier = experiencePointsRequirementMultiplier;
+		SpawnRate = spawnRate;
+		PrefabPath = prefabPath;
 	}
 
 	// Methods
@@ -136,6 +144,27 @@ public abstract class BaseUnit : ScriptableObject
 		if (Level == 100)
 		{
 			ExperiencePoints = 0;
+		}
+	}
+
+	public List<AttackModel> GetAllAttacks()
+	{
+		var attackProperties = new List<AttackModel>();
+
+		AddToListNotNullAttack(FirstAttack, attackProperties);
+		AddToListNotNullAttack(SecondAttack, attackProperties);
+		AddToListNotNullAttack(ThirdAttack, attackProperties);
+		AddToListNotNullAttack(FourthAttack, attackProperties);
+
+
+		return attackProperties;
+	}
+
+	private void AddToListNotNullAttack(AttackModel attack, List<AttackModel> attackList)
+	{
+		if(attack is not null)
+		{
+			attackList.Add(attack);
 		}
 	}
 }

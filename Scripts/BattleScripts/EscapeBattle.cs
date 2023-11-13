@@ -5,10 +5,10 @@ using UnityEngine;
 
 public static class EscapeBattle 
 {
-	private static int CurrentAmountOfTries = 1;
+	private static int CurrentAmountOfTries = 0;
 	public static bool HasPlayerEscaped(BaseUnit playerUnit, BaseUnit enemyUnit)
 	{
-		var unitLevelDiff = (int)(playerUnit.Level - enemyUnit.Level);
+		var unitLevelDiff = playerUnit.Level - enemyUnit.Level;
 		var isSuccess = false;
 
 		switch (unitLevelDiff) 
@@ -23,17 +23,19 @@ public static class EscapeBattle
 
 		if (isSuccess)
 		{
+			CurrentAmountOfTries = 0;
 			SceneChanger.UnloadBattleScene();
 			return true;
 		}
 
-		FightHandler.EnemyOnlyAttack(enemyUnit, enemyUnit);
+		CurrentAmountOfTries++;
+		FightHandler.EnemyOnlyAttack(enemyUnit, playerUnit);
 		return false;
 	}
 
 	private static bool HasRunSuccededForGreater()
-		=> Random.Range(0, 15) > 7;
+		=> Random.Range(0, 21) >= 10;
 
 	private static bool HasRunSuccededForEqual()
-		=> Random.Range(0, 11) < 7;
+		=> (Random.Range(0, 21) + CurrentAmountOfTries) >= 10;
 }
