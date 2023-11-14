@@ -5,9 +5,7 @@ using UnityEngine;
 
 public abstract class BaseUnit : ScriptableObject
 {
-	private static uint instanceCounter = 0;
 	// Public properties
-	public uint Id = instanceCounter++;
 	[SerializeField] public Guid UniqueId;
 	[SerializeField] public string Name;
 	[SerializeField] public double MaxHealthPoints;

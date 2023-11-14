@@ -43,7 +43,7 @@ namespace asd
 					var myUnit = UnitsFactory.GetUnit(
 						spawnableUnits[Random.Range(
 							0,
-							spawnableUnits.Count +1)]);
+							spawnableUnits.Count)]);
 
 					if (UnityEngine.Random.Range(1, 6) <= myUnit.SpawnRate)
 					{

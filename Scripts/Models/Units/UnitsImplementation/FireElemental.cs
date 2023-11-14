@@ -94,7 +94,7 @@ public class FireElemental : BaseUnit
 		PrefabPath = prefabPath;
 	}
 
-	public FireElemental()
+	public void init()
 	{
 		Name = nameof(FireElemental);
 		MaxHealthPoints = 100;

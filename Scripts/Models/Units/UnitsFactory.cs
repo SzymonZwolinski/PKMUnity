@@ -1,18 +1,30 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class UnitsFactory
 {
-	public static BaseUnit GetUnit(UnitNames unitName)
+	private static Dictionary<UnitNames, Func<BaseUnit>> unitInitDelegates = new ()
 	{
-		if (units.ContainsKey(unitName))
+		{ UnitNames.FireElemental, CreateFireElemental },
+    };
+
+	public static BaseUnit GetUnit(UnitNames unitName)
+	{	
+		if (unitInitDelegates.TryGetValue(unitName, out Func<BaseUnit> createMethod))
 		{
-			return units[unitName];
+			var unit = createMethod.Invoke();
+			return unit;
 		}
-		return null;
+		else
+		{
+			Debug.LogWarning($"Unknown unit type: {unitName}");
+			return null;
+		}		
 	}
 
-	public static Dictionary<UnitNames, BaseUnit> units { get; set; } = new Dictionary<UnitNames, BaseUnit>
+	private static BaseUnit CreateFireElemental()
 	{
-		{ UnitNames.FireElemental, new FireElemental()},
-	};
+		return ScriptableObject.CreateInstance("FireElemental") as FireElemental;
+	}
 }

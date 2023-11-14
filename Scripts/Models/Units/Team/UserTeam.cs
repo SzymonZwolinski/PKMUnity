@@ -106,6 +106,7 @@ public class UserTeam : MonoBehaviour
 
 	public void MoveUnitInTeamToIntendedPosition(int oldPosition, int newPosition)
 	{
+		Debug.Log($"old = {oldPosition} new = {newPosition}");
 		var unitToMove = Team[oldPosition];
 
 		Team.RemoveAt(oldPosition);

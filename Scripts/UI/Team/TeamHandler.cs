@@ -40,10 +40,15 @@ public class TeamHandler : MonoBehaviour
     private void OpenTeamPanel()
     {
         TeamPanel.SetActive(true);
-        
+
+        RefrestTeamPanel();
+	}
+
+    public void RefrestTeamPanel()
+    {
 		for (int i = 0; i < 6; i++)
 		{
-            var slot = TeamPanel.transform.Find($"Team{i + 1}Slot").gameObject;
+			var slot = TeamPanel.transform.Find($"Team{i + 1}Slot").gameObject;
 			SetSlotContent(i, slot);
 		}
 	}
@@ -54,6 +59,19 @@ public class TeamHandler : MonoBehaviour
         if (units.Count > position && 
             units[position] is not null)
         {
+            var moveDownBttn = slot.transform.Find("MoveDown");
+            var moveUpBttn = slot.transform.Find("MoveUp");
+
+            if(moveDownBttn != null &&
+                units.Count-1 != position)
+            {
+                moveDownBttn.gameObject.SetActive(true);
+            }
+
+            if (moveUpBttn != null)
+            {
+                moveUpBttn.gameObject.SetActive(true); 
+            }
 
             var unitInSlot = units[position];
             var nameField = slot.transform.Find("Name").GetComponent<Text>();
