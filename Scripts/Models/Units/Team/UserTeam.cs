@@ -104,4 +104,11 @@ public class UserTeam : MonoBehaviour
 		}
 	}
 
+	public void MoveUnitInTeamToIntendedPosition(int oldPosition, int newPosition)
+	{
+		var unitToMove = Team[oldPosition];
+
+		Team.RemoveAt(oldPosition);
+		Team.Insert(newPosition, unitToMove);		
+	}
 }
