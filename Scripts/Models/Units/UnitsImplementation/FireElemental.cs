@@ -64,6 +64,8 @@ public class FireElemental : BaseUnit
 			spawnRate,
 			prefabPath)
 	{
+		Name = nameof(FireElemental);
+		MaxHealthPoints = 100;
 		HealthPoints = 100;
 		Attack = 10;
 		SpecialAttack = 10;
@@ -73,7 +75,7 @@ public class FireElemental : BaseUnit
 		Stamina = 100;
 		IsAlive = true;
 		FirstType = Types.Fire;
-		SecondaryType = null;
+		SecondaryType = Types.Water;
 		Level = 5;
 		BaseExperiencePointsToNextLevel = 100;
 		ExperiencePointsToNextLevel = BaseExperiencePointsToNextLevel;
@@ -90,8 +92,13 @@ public class FireElemental : BaseUnit
 		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
-		SpawnRate = spawnRate;
-		PrefabPath = prefabPath;
+		FirstAttack = null;
+		SecondAttack = AttacsFactory.GetAttack("MagicBolt");
+		ThirdAttack = null;
+		FourthAttack = null;
+		AvailibleAttacks = new List<string> { "_", "_", "MagicBolt", "_" };
+		SpawnRate = 1;
+		PrefabPath = "Slime_02";
 	}
 
 	public void init()

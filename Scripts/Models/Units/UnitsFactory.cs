@@ -25,6 +25,9 @@ public static class UnitsFactory
 
 	private static BaseUnit CreateFireElemental()
 	{
-		return ScriptableObject.CreateInstance("FireElemental") as FireElemental;
+		var unit =  ScriptableObject.CreateInstance("FireElemental") as FireElemental;
+
+		unit.init();
+		return unit;
 	}
 }

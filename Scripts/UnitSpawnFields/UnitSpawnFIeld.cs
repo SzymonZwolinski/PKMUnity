@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace asd
 {
-	public class UnitSpawnField : MonoBehaviour
+	public class UnitSpawnFIeld : MonoBehaviour
 	{
 		public List<UnitNames> spawnableUnits = new();
 
@@ -35,10 +35,13 @@ namespace asd
 
 		private void Update()
 		{
+			
 			if (triggerActive &&
-				PlayerCollider.transform.position != LastPlayerPosition)
+				(Mathf.Abs(PlayerCollider.transform.position.z - LastPlayerPosition.z) >= 0.5 ||
+				Mathf.Abs(PlayerCollider.transform.position.x - LastPlayerPosition.x) >= 0.5))
 			{
-				if (Random.Range(1, 101) == 1)
+				var asd = Random.Range(1, 101);
+				if (Random.Range(1, 101) <= 90)
 				{
 					var myUnit = UnitsFactory.GetUnit(
 						spawnableUnits[Random.Range(
