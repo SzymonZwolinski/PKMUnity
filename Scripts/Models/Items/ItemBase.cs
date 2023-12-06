@@ -1,33 +1,24 @@
 using System;
+using UnityEngine;
 
-public abstract class ItemBase 
+public abstract class ItemBase : ScriptableObject
 {
-    public Guid Id { get; private set; }
-    public string Name { get; private set; }
-    public string Description { get; private set; }
+    public Guid Id { get; protected set; }
+    public string Name { get; protected set; }
+    public string Description { get; protected set; }
     public float Value => _value * Quantity;
-	protected float _value { get; set; }
-    public uint Quantity { get; private set; }
-    public float SellValue { get; private set; }
-    public byte[] Icon {get; private set; }
-
-    public ItemBase(
-        string name,
-        string description, 
-        float value, 
-        uint quantity,
-        byte[] icon)
-    {
-        Id = Guid.NewGuid();
-		Name = name;
-        Description = description;
-        Quantity = quantity;
-        SetValue(value);
-        Icon = icon;
-	}
+	protected float _value { get; set; }    
+    public uint Quantity { get; protected set; }
 
     protected void SetValue(float value)
     {
 		_value = MathF.Round(value,2);
 	}
+
+    public abstract void UseItem(BaseUnit unit);
+
+    public void AddQuantity()
+    {
+        Quantity++;
+    }
 }

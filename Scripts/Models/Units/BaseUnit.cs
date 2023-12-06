@@ -145,6 +145,15 @@ public abstract class BaseUnit : ScriptableObject
 		}
 	}
 
+	public void Heal(int amount)
+	{
+		HealthPoints += amount;
+		if(HealthPoints > MaxHealthPoints)
+		{
+			HealthPoints = MaxHealthPoints;
+		}
+	}	
+
 	public List<AttackModel> GetAllAttacks()
 	{
 		var attackProperties = new List<AttackModel>();

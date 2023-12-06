@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddFirstUnit : MonoBehaviour
+public static class AddFirstUnit 
 {
-   public void AddFirstUnitToPlayerTeam()
+   public static void AddFirstUnitToPlayerTeam()
 	{
 		var userTeam = GameObject
 			.FindGameObjectWithTag("Player")
@@ -15,7 +15,7 @@ public class AddFirstUnit : MonoBehaviour
 		userTeam.AddToTeamOrStorage(firstUnit);
 	}
 
-	private BaseUnit PrepareFirstUnit()
+	private static BaseUnit PrepareFirstUnit()
 	{
 		return new FirstTestUnit();
 	}

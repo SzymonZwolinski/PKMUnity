@@ -10,6 +10,14 @@ public class UserTeam : MonoBehaviour
 	public List<BaseUnit> Team = new List<BaseUnit>();
 	public List<BaseUnit> Storage = new List<BaseUnit>();
 
+	private void Start()
+	{
+		if (Team.Count == 0)
+		{
+			AddFirstUnit.AddFirstUnitToPlayerTeam();
+		}
+	}
+
 	public void AddToTeamOrStorage(BaseUnit unit)
 	{
 		if(Team.Count > MaxTeamSize)
