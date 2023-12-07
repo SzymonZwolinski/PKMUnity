@@ -32,7 +32,6 @@ public abstract class BaseUnit : ScriptableObject
 	[SerializeField] public uint StaminaLearned;
 	[SerializeField] public bool HasBeenSeen;
 	[SerializeField] public bool HasBeenCaught;
-	[SerializeField] public HoldItem HeldItem;
 	[SerializeField] public float ExperiencePointsWorth;
 	[SerializeField] public uint SpawnRate;
 
@@ -116,7 +115,7 @@ public abstract class BaseUnit : ScriptableObject
 	}
 
 	// Methods
-	protected void CalculateExperiencePoints(float gainedExperiencePoints)
+	public void AddExperiencePoints(float gainedExperiencePoints)
 	{
 		if (Level == 100)
 		{
@@ -133,16 +132,17 @@ public abstract class BaseUnit : ScriptableObject
 
 	public void LevelUp()
 	{
+		if(Level == 100)
+		{
+			return;
+		}
 		var overExceedingExperiencePoints = ExperiencePoints - ExperiencePointsToNextLevel;
 
 		ExperiencePointsToNextLevel *= ExperiencePointsRequirementMultiplier;
 		ExperiencePoints = 0 + overExceedingExperiencePoints;
 		Level += 1;
 
-		if (Level == 100)
-		{
-			ExperiencePoints = 0;
-		}
+		ImproveStats();
 	}
 
 	public void Heal(int amount)
@@ -174,4 +174,8 @@ public abstract class BaseUnit : ScriptableObject
 			attackList.Add(attack);
 		}
 	}
+
+	protected abstract void ImproveStats();
+
+	protected abstract ItemBase CheckIfAnyItemCouldBeDropper();
 }

@@ -21,6 +21,7 @@ public static class SceneChanger
 					.ToString());
 
 		UnFreezePlayerMovement();
+		HidePlayer.ShowPlayerModel();
 	}
 
 	private static void EnableMainSceneObjects()
@@ -47,6 +48,7 @@ public static class SceneChanger
 		InitalizeMainScene(currentActiveScene);
 		InitalizeLastUserPosition(lastPlayerPos);
 		FreezePlayerMovement();
+		HidePlayer.HidePlayerModel();
 
 		var loadSceneAsyncTask =
 			SceneManager.LoadSceneAsync(

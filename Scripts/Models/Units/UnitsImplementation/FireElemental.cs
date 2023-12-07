@@ -139,4 +139,9 @@ public class FireElemental : BaseUnit
 		SpawnRate = 1;
 		PrefabPath = "Slime_02";
 	}
+
+	protected override void ImproveStats()
+	{
+		throw new System.NotImplementedException();
+	}
 }
