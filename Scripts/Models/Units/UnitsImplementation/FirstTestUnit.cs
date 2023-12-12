@@ -135,7 +135,7 @@ public class FirstTestUnit : BaseUnit
         throw new System.NotImplementedException();
     }
 
-    protected override ItemBase CheckIfAnyItemCouldBeDropped()
+    public override ItemBase CheckIfAnyItemCouldBeDropped()
     {
         throw new System.NotImplementedException();
     }
