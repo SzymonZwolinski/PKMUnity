@@ -35,14 +35,16 @@ public abstract class BaseUnit : ScriptableObject
 	[SerializeField] public float ExperiencePointsWorth;
 	[SerializeField] public uint SpawnRate;
 
+	[SerializeField] public List<Items> AvailibleItems;
+
 	// Protected properties
 	[SerializeField] protected float ExperiencePointsRequirementMultiplier;
-
+	
 	[SerializeField] public AttackModel FirstAttack;
 	[SerializeField] public AttackModel SecondAttack;
 	[SerializeField] public AttackModel ThirdAttack;
 	[SerializeField] public AttackModel FourthAttack;
-	protected List<string> AvailibleAttacks = new List<string>(); //TODO: Change this to some enum later
+	protected List<string> AvailibleAttacks = new List<string>();
 
 	[SerializeField] public string PrefabPath;
 	// Constructors
@@ -76,7 +78,6 @@ public abstract class BaseUnit : ScriptableObject
 		uint staminaLearned,
 		bool hasBeenSeen,
 		bool hasBeenCaught,
-		HoldItem heldItem,
 		float experiencePointsWorth,
 		float experiencePointsRequirementMultiplier,
 		uint spawnRate,
@@ -107,7 +108,6 @@ public abstract class BaseUnit : ScriptableObject
 		StaminaLearned = staminaLearned;
 		HasBeenSeen = hasBeenSeen;
 		HasBeenCaught = hasBeenCaught;
-		HeldItem = heldItem;
 		ExperiencePointsWorth = experiencePointsWorth;
 		ExperiencePointsRequirementMultiplier = experiencePointsRequirementMultiplier;
 		SpawnRate = spawnRate;
@@ -177,5 +177,5 @@ public abstract class BaseUnit : ScriptableObject
 
 	protected abstract void ImproveStats();
 
-	protected abstract ItemBase CheckIfAnyItemCouldBeDropper();
+	public abstract ItemBase CheckIfAnyItemCouldBeDropped();
 }

@@ -30,7 +30,6 @@ public class FirstTestUnit : BaseUnit
 		uint staminaLearned,
 		bool hasBeenSeen, 
 		bool hasBeenCaught,
-		HoldItem heldItem, 
 		float experiencePointsWorth,
 		float experiencePointsRequirementMultiplier,
 		uint spawnRate,
@@ -59,7 +58,6 @@ public class FirstTestUnit : BaseUnit
 			staminaLearned, 
 			hasBeenSeen,
 			hasBeenCaught, 
-			heldItem, 
 			experiencePointsWorth, 
 			experiencePointsRequirementMultiplier,
 			spawnRate,
@@ -88,7 +86,6 @@ public class FirstTestUnit : BaseUnit
 		StaminaLearned = 0;
 		HasBeenSeen = true;
 		HasBeenCaught = false;
-		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
 		SpawnRate = spawnRate;
@@ -122,7 +119,6 @@ public class FirstTestUnit : BaseUnit
 		StaminaLearned = 0;
 		HasBeenSeen = true;
 		HasBeenCaught = false;
-		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
 		FirstAttack = AttacsFactory.GetAttack("Bite");
@@ -133,4 +129,14 @@ public class FirstTestUnit : BaseUnit
 		SpawnRate = 1;
 		PrefabPath = "Slime_02";
 	}
+
+    protected override void ImproveStats()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override ItemBase CheckIfAnyItemCouldBeDropped()
+    {
+        throw new System.NotImplementedException();
+    }
 }

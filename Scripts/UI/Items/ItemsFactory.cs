@@ -11,7 +11,7 @@ public static class ItemsFactory
 		{ Items.Apple, CreateApple },
 	};
 
-	public static ItemBase GetUnit(Items itemName)
+	public static ItemBase GetItem(Items itemName)
 	{
 		if (unitInitDelegates.TryGetValue(itemName, out Func<ItemBase> createMethod))
 		{
@@ -20,7 +20,7 @@ public static class ItemsFactory
 		}
 		else
 		{
-			Debug.LogWarning($"Unknown unit type: {itemName}");
+			Debug.LogWarning($"Unknown item type: {itemName}");
 			return null;
 		}
 	}
