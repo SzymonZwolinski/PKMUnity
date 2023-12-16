@@ -1,7 +1,7 @@
 
 public class HoldItem : ItemBase
 {
-	public override void UseItem(BaseUnit unit)
+	public override void TryToUseItem(BaseUnit unit)
 	{
 		
 	}

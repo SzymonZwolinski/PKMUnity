@@ -7,13 +7,13 @@ public static class ItemInitializer
 {
     public static ItemBase OneOrNoneItemFromList(IEnumerable<Items> availibleItems)
     {
-        var asd = Random.Range(0, availibleItems.Count()+1);
+        var chance = Random.Range(0, availibleItems.Count()+1);
 
-        if((availibleItems.Count()  -1) < asd )
+        if((availibleItems.Count()  -1) < chance )
         {
             return null;
         }
 
-        return ItemsFactory.GetItem(availibleItems.ElementAt(asd));
+        return ItemsFactory.GetItem(availibleItems.ElementAt(chance));
     }
 }

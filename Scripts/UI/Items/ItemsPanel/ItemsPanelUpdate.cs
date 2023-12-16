@@ -1,4 +1,5 @@
 
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,9 +33,43 @@ public class ItemsPanelUpdate : MonoBehaviour
 		UpdateTextFields();
 	}
 
+	public void UseItem()
+	{
+
+		var playerUnit = GameObject
+			.FindGameObjectWithTag("Player")
+			.GetComponentInChildren<UserTeam>()
+			.Team
+			.FirstOrDefault();
+		var enemy = GameObject
+            .FindGameObjectWithTag("Enemy")
+            .GetComponent<UnitTypeMarker>()
+            .UnitType;
+
+        var hasItemUseageSucceded = currentItem.TryToUseItem(playerUnit);
+
+		if (hasItemUseageSucceded)
+		{
+			FightHandler.EnemyOnlyAttack(enemy, playerUnit);
+			return;
+		}
+		ItemUseFail();
+	}
+
 	private void UpdateTextFields()
 	{
-		Title.text = currentItem?.name.ToString() ?? "";
+		ResetDescColour();
+
+        Title.text = currentItem?.name.ToString() ?? "";
 		Description.text = currentItem?.Description ?? "---";
 	}
+
+	private void ItemUseFail()
+	{
+		Description.text = "Item cannot be used";
+		Description.color = Color.red;
+	}
+
+	private void ResetDescColour()
+		=> Description.color = Color.black;
 }

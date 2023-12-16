@@ -15,7 +15,7 @@ public abstract class ItemBase : ScriptableObject
 		_value = MathF.Round(value,2);
 	}
 
-    public abstract void UseItem(BaseUnit unit);
+    public abstract bool TryToUseItem(BaseUnit unit);
 
     public void AddQuantity()
     {

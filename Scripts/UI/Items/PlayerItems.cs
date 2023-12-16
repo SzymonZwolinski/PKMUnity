@@ -72,6 +72,6 @@ public class PlayerItems : MonoBehaviour
 
     public void UseItem(BaseUnit unit)
     {
-        items[CurrentItem].UseItem(unit);
+        items[CurrentItem].TryToUseItem(unit);
     }
 }

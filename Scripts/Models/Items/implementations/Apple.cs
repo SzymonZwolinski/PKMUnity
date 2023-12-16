@@ -10,20 +10,24 @@ public class Apple : ItemBase
         
     }
 
-    public override void UseItem(BaseUnit unit)
+    public override bool TryToUseItem(BaseUnit unit)
 	{
 		if (Quantity > 0)
 		{
 			unit.Heal(25);
 			Quantity--;
+
+			return true;
 		}	
+
+		return false;
 	}
 
 	public void Init()
 	{
 		Name = nameof(Apple);
 		Description = "Heal unit by 25";
-		Quantity = Quantity == 0 ? 1 : Quantity++;
+		Quantity = 1;
 		SetValue(25);
 	}
 }
