@@ -1,8 +1,8 @@
 
 public class HoldItem : ItemBase
 {
-	public override void TryToUseItem(BaseUnit unit)
+	public override bool TryToUseItem(BaseUnit unit)
 	{
-		
+		return false;
 	}
 }

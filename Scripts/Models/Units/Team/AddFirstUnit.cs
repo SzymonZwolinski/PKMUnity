@@ -17,6 +17,6 @@ public static class AddFirstUnit
 
 	private static BaseUnit PrepareFirstUnit()
 	{
-		return new FirstTestUnit();
+		return new WaterElemental();
 	}
 }

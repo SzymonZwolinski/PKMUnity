@@ -18,6 +18,12 @@ public class TeamHandler : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        units = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<UserTeam>().Team;
+        RefrestTeamPanel();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +43,7 @@ public class TeamHandler : MonoBehaviour
         }
     }
 
-    private void OpenTeamPanel()
+    public void OpenTeamPanel()
     {
         TeamPanel.SetActive(true);
 
@@ -52,7 +58,6 @@ public class TeamHandler : MonoBehaviour
 			SetSlotContent(i, slot);
 		}
 	}
-
     private void SetSlotContent(int position, GameObject slot)
     {
 

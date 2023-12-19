@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class FirstTestUnit : BaseUnit
+public class WaterElemental : BaseUnit
 {
 	
-	public FirstTestUnit(
+	public WaterElemental(
 		int healthPoints,
 		uint attack,
 		uint specialAttack,
@@ -65,13 +65,13 @@ public class FirstTestUnit : BaseUnit
 	{
 		HealthPoints = 100;
 		Attack = 10;
-		SpecialAttack = 10;
-		Defence = 10;
-		SpecialDefence = 10;
-		Speed = 10;
+		SpecialAttack = 5;
+		Defence = 8;
+		SpecialDefence = 12;
+		Speed = 15;
 		Stamina = 100;
 		IsAlive = true;
-		FirstType = Types.Fire;
+		FirstType = Types.Water;
 		SecondaryType = null;
 		Level = 5;
 		BaseExperiencePointsToNextLevel = 100;
@@ -92,9 +92,9 @@ public class FirstTestUnit : BaseUnit
 		PrefabPath = prefabPath;
 	}
 
-	public FirstTestUnit()
+	public WaterElemental()
 	{
-		Name = nameof(FirstTestUnit);
+		Name = nameof(WaterElemental);
 		MaxHealthPoints = 100;
 		HealthPoints = 100;
 		Attack = 10;
@@ -104,7 +104,7 @@ public class FirstTestUnit : BaseUnit
 		Speed = 10;
 		Stamina = 100;
 		IsAlive = true;
-		FirstType = Types.Fire;
+		FirstType = Types.Water;
 		SecondaryType = null;
 		Level = 5;
 		BaseExperiencePointsToNextLevel = 100;
@@ -122,21 +122,40 @@ public class FirstTestUnit : BaseUnit
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
 		FirstAttack = AttacsFactory.GetAttack("Bite");
-		SecondAttack = AttacsFactory.GetAttack("MagicBolt");
-		ThirdAttack = AttacsFactory.GetAttack("Poison");
-		FourthAttack = null;
+		SecondAttack = null;
+		ThirdAttack = null;
+        FourthAttack = null;
 		AvailibleAttacks = new List<string> { "_", "Bite", "MagicBolt", "Poison" };
+		AvailibleItems = new List<Items> { Items.Apple };
 		SpawnRate = 1;
-		PrefabPath = "Slime_02";
+		PrefabPath = "Slime_03 Leaf";
 	}
+
+    public override ItemBase CheckIfAnyItemCouldBeDropped()
+       => ItemInitializer.OneOrNoneItemFromList(AvailibleItems);
 
     protected override void ImproveStats()
     {
-        throw new System.NotImplementedException();
-    }
+        HealthPointsLearned += 10;
+        AttackLearned += 2;
+        SpecialAttackLearned += 2;
+        DefenceLearned += 2;
+        SpecialDefenceLearned += 2;
+        SpeedLearned += 2;
+        StaminaLearned += 2;
 
-    public override ItemBase CheckIfAnyItemCouldBeDropped()
-    {
-        throw new System.NotImplementedException();
+        MaxHealthPoints += HealthPointsLearned;
+        HealthPoints += MaxHealthPoints;
+        Attack += AttackLearned;
+        SpecialAttack += SpecialAttackLearned;
+        Defence += DefenceLearned;
+        SpecialDefence += SpecialDefenceLearned;
+        Speed += SpeedLearned;
+        Stamina += StaminaLearned;
+
+		if(Level == 5)
+		{
+			SecondAttack = AttacsFactory.GetAttack("MagicBolt");
+		}
     }
 }
