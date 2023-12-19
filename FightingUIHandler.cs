@@ -4,7 +4,9 @@ public class FightingUIHandler : MonoBehaviour
 {
     public GameObject MainPanel;
     public GameObject FightingPanel;
-    public GameObject ItemPanel;
+    public GameObject ActionPanel;
+    public GameObject ItemsPanel;
+    public GameObject TeamPanel;
 
     private GameObject CurrentActivePanel;
 
@@ -16,12 +18,12 @@ public class FightingUIHandler : MonoBehaviour
         CurrentActivePanel = FightingPanel;
     }
 
-    public void ActivateItemPanel()
+    public void ActivateActionPanel()
     {
 		MainPanel.SetActive(false);
-		ItemPanel.SetActive(true);
+		ActionPanel.SetActive(true);
 
-		CurrentActivePanel = ItemPanel;
+		CurrentActivePanel = ActionPanel;
 	}    
 
     public void ActivateMainPanel()
@@ -32,4 +34,19 @@ public class FightingUIHandler : MonoBehaviour
         CurrentActivePanel = MainPanel;
     }
 
+    public void ActivateItemsPanel()
+    {
+        CurrentActivePanel.SetActive(false);
+        ItemsPanel.SetActive(true);
+
+        CurrentActivePanel = ItemsPanel;
+    }
+
+    public void ActivateTeamPanel()
+    {
+        MainPanel.SetActive(false);
+        TeamPanel.SetActive(true);
+
+        CurrentActivePanel = TeamPanel;
+    }
 }
