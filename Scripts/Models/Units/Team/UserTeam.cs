@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class UserTeam : MonoBehaviour
 {
 	private readonly short MaxTeamSize = 5; // = 6 bcs list is iterating from 0
-
-	public List<BaseUnit> Team = new List<BaseUnit>();
+    
+    public List<BaseUnit> Team = new List<BaseUnit>();
 	public List<BaseUnit> Storage = new List<BaseUnit>();
 
 	private void Start()

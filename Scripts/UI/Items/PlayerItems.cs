@@ -5,38 +5,38 @@ using UnityEngine;
 
 public class PlayerItems : MonoBehaviour
 {
-    public List<ItemBase> items = new List<ItemBase>();
+    public List<ItemBase> Items = new List<ItemBase>();
     private int CurrentItem = 0;
 
     public void AddItem(ItemBase item)
     {
-        if(items.Any(x => x.name == item.name))
+        if(Items.Any(x => x.name == item.name))
         {
-            items.First(x=> x.name == item.name).AddQuantity();
+            Items.First(x=> x.name == item.name).AddQuantity();
         }
 
-        items.Add(item);
+        Items.Add(item);
     }
 
     public void TryToRemoveItem(ItemBase item)
     {
-        if(items.Any(x => x.name == item.name))
+        if(Items.Any(x => x.name == item.name))
         {
-            if(items.First(x=> x.name == item.Name).Quantity == 0)
+            if(Items.First(x=> x.name == item.Name).Quantity == 0)
             {
-                items.Remove(item);
+                Items.Remove(item);
             }
         }
     }
 
     public ItemBase NextItem()
     {
-        if(items.Count == 0)
+        if(Items.Count == 0)
         {
             return null;
         }
 
-        if(CurrentItem+1 > items.Count)
+        if(CurrentItem+1 > Items.Count)
         {
             CurrentItem = 0;
         }
@@ -45,33 +45,33 @@ public class PlayerItems : MonoBehaviour
             CurrentItem++;
         }
 
-        return items[CurrentItem];
+        return Items[CurrentItem];
 	}
 
     public ItemBase PreviousItem()
     {
-		if (items.Count == 0)
+		if (Items.Count == 0)
 		{
 			return null;
 		}
 
 		if (CurrentItem == 0)
 		{
-			CurrentItem = items.Count-1;
+			CurrentItem = Items.Count-1;
 		}
 		else
 		{
 			CurrentItem--;
 		}
 
-		return items[CurrentItem];
+		return Items[CurrentItem];
 	}
 
     public ItemBase GetFirstItem()
-     => items.FirstOrDefault();
+     => Items.FirstOrDefault();
 
     public void UseItem(BaseUnit unit)
     {
-        items[CurrentItem].TryToUseItem(unit);
+        Items[CurrentItem].TryToUseItem(unit);
     }
 }

@@ -58,6 +58,7 @@ public static class SceneChanger
 
 		DisableMainSceneObjectsExceptPlayer();
 	}
+
 	private static void InitalizeMainScene(Scene sceneToLoad)
 	{
 		MainScene = sceneToLoad;
@@ -85,4 +86,12 @@ public static class SceneChanger
 			}
 		}
 	}
+
+	public static void StartGame()
+	{
+		var loadSceneAsyncTask =
+			SceneManager.LoadSceneAsync(
+				SceneNames.v1
+					.ToString());	
+    }
 }
