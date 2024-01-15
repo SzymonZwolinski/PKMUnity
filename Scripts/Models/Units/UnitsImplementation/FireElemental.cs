@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -58,7 +59,6 @@ public class FireElemental : BaseUnit
 			staminaLearned,
 			hasBeenSeen,
 			hasBeenCaught,
-			heldItem,
 			experiencePointsWorth,
 			experiencePointsRequirementMultiplier,
 			spawnRate,
@@ -89,7 +89,6 @@ public class FireElemental : BaseUnit
 		StaminaLearned = 0;
 		HasBeenSeen = true;
 		HasBeenCaught = false;
-		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
 		FirstAttack = null;
@@ -97,6 +96,7 @@ public class FireElemental : BaseUnit
 		ThirdAttack = null;
 		FourthAttack = null;
 		AvailibleAttacks = new List<string> { "_", "_", "MagicBolt", "_" };
+		AvailibleItems = new List<Items> { Items.Apple };
 		SpawnRate = 1;
 		PrefabPath = "Slime_02";
 	}
@@ -128,7 +128,6 @@ public class FireElemental : BaseUnit
 		StaminaLearned = 0;
 		HasBeenSeen = true;
 		HasBeenCaught = false;
-		HeldItem = null;
 		ExperiencePointsWorth = 10;
 		ExperiencePointsRequirementMultiplier = 1.1f;
 		FirstAttack = null;
@@ -136,7 +135,31 @@ public class FireElemental : BaseUnit
 		ThirdAttack = null;
 		FourthAttack = null;
 		AvailibleAttacks = new List<string> { "_", "_", "MagicBolt", "_" };
-		SpawnRate = 1;
+        AvailibleItems = new List<Items> { Items.Apple };
+        SpawnRate = 1;
 		PrefabPath = "Slime_02";
 	}
+
+    public override ItemBase CheckIfAnyItemCouldBeDropped()
+		=> ItemInitializer.OneOrNoneItemFromList(AvailibleItems);
+
+    protected override void ImproveStats()
+    {
+        HealthPointsLearned += 10;
+        AttackLearned += 2;
+        SpecialAttackLearned += 2;
+        DefenceLearned += 2;
+        SpecialDefenceLearned += 2;
+        SpeedLearned += 2;
+        StaminaLearned += 2;
+
+        MaxHealthPoints += HealthPointsLearned;
+        HealthPoints += MaxHealthPoints;
+        Attack += AttackLearned;
+        SpecialAttack += SpecialAttackLearned;
+        Defence += DefenceLearned;
+        SpecialDefence += SpecialDefenceLearned;
+        Speed += SpeedLearned;
+        Stamina += StaminaLearned;
+    }
 }

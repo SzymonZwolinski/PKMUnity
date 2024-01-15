@@ -72,11 +72,13 @@ namespace asd
 
 			spawnedUnit.AddComponent<StatHolder>()
 				.UnitStats = unitToSpawn;
+			/*
+						spawnedUnit.transform
+							.LookAt(
+								GameObject.FindWithTag("MainCamera")
+									.transform);*/
+			spawnedUnit.transform.eulerAngles = new Vector3(0, 180, 0);
 
-			spawnedUnit.transform
-				.LookAt(
-					GameObject.FindWithTag("MainCamera")
-						.transform);
 		}
 			
 	}

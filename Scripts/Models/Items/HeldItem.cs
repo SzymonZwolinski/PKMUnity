@@ -1,8 +1,8 @@
 
 public class HoldItem : ItemBase
 {
-	public HoldItem(string name, string description, float value, uint quantity, byte[] icon) 
-		: base(name, description, value, quantity, icon)
+	public override bool TryToUseItem(BaseUnit unit)
 	{
+		return false;
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public abstract class BaseUnit : ScriptableObject
 {
 	// Public properties
@@ -32,18 +33,19 @@ public abstract class BaseUnit : ScriptableObject
 	[SerializeField] public uint StaminaLearned;
 	[SerializeField] public bool HasBeenSeen;
 	[SerializeField] public bool HasBeenCaught;
-	[SerializeField] public HoldItem HeldItem;
 	[SerializeField] public float ExperiencePointsWorth;
 	[SerializeField] public uint SpawnRate;
 
+	[SerializeField] public List<Items> AvailibleItems;
+
 	// Protected properties
 	[SerializeField] protected float ExperiencePointsRequirementMultiplier;
-
+	
 	[SerializeField] public AttackModel FirstAttack;
 	[SerializeField] public AttackModel SecondAttack;
 	[SerializeField] public AttackModel ThirdAttack;
 	[SerializeField] public AttackModel FourthAttack;
-	protected List<string> AvailibleAttacks = new List<string>(); //TODO: Change this to some enum later
+	protected List<string> AvailibleAttacks = new List<string>();
 
 	[SerializeField] public string PrefabPath;
 	// Constructors
@@ -77,7 +79,6 @@ public abstract class BaseUnit : ScriptableObject
 		uint staminaLearned,
 		bool hasBeenSeen,
 		bool hasBeenCaught,
-		HoldItem heldItem,
 		float experiencePointsWorth,
 		float experiencePointsRequirementMultiplier,
 		uint spawnRate,
@@ -108,7 +109,6 @@ public abstract class BaseUnit : ScriptableObject
 		StaminaLearned = staminaLearned;
 		HasBeenSeen = hasBeenSeen;
 		HasBeenCaught = hasBeenCaught;
-		HeldItem = heldItem;
 		ExperiencePointsWorth = experiencePointsWorth;
 		ExperiencePointsRequirementMultiplier = experiencePointsRequirementMultiplier;
 		SpawnRate = spawnRate;
@@ -116,7 +116,7 @@ public abstract class BaseUnit : ScriptableObject
 	}
 
 	// Methods
-	protected void CalculateExperiencePoints(float gainedExperiencePoints)
+	public void AddExperiencePoints(float gainedExperiencePoints)
 	{
 		if (Level == 100)
 		{
@@ -133,17 +133,27 @@ public abstract class BaseUnit : ScriptableObject
 
 	public void LevelUp()
 	{
+		if(Level == 100)
+		{
+			return;
+		}
 		var overExceedingExperiencePoints = ExperiencePoints - ExperiencePointsToNextLevel;
 
 		ExperiencePointsToNextLevel *= ExperiencePointsRequirementMultiplier;
 		ExperiencePoints = 0 + overExceedingExperiencePoints;
 		Level += 1;
 
-		if (Level == 100)
-		{
-			ExperiencePoints = 0;
-		}
+		ImproveStats();
 	}
+
+	public void Heal(int amount)
+	{
+		HealthPoints += amount;
+		if(HealthPoints > MaxHealthPoints)
+		{
+			HealthPoints = MaxHealthPoints;
+		}
+	}	
 
 	public List<AttackModel> GetAllAttacks()
 	{
@@ -165,4 +175,8 @@ public abstract class BaseUnit : ScriptableObject
 			attackList.Add(attack);
 		}
 	}
+
+	protected abstract void ImproveStats();
+
+	public abstract ItemBase CheckIfAnyItemCouldBeDropped();
 }

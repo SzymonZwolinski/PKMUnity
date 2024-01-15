@@ -1,4 +1,5 @@
 using asd;
+using Assets.Scripts.UI.Items;
 using System.Linq;
 using UnityEngine;
 
@@ -13,8 +14,6 @@ public static class FightHandler
 	{
 		var enemyAttack = GetEnemyAttack(enemyUnit, playerUnit);
 
-		Debug.Log(enemyAttack);
-		
 		var enemyTurnDamage = CalculateAttackStats(
 			enemyAttack, 
 			enemyUnit,
@@ -66,6 +65,9 @@ public static class FightHandler
 		if(enemyUnit.HealthPoints <= 0 || playerUnit.HealthPoints <=0)
 		{
 			Turn = 1;
+			playerUnit.AddExperiencePoints(enemyUnit.ExperiencePointsWorth * (enemyUnit.Level * 1.1f));
+			
+			PlayerItemsHelper.TryToAddItemsToPlayerForDefeatedUnit(enemyUnit);
 			SceneChanger.UnloadBattleScene();
 		}
 	}
