@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public abstract class ItemBase : ScriptableObject
 {
     public Guid Id { get; protected set; }

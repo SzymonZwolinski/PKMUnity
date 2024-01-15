@@ -40,7 +40,7 @@ public class GameSaveHandler : MonoBehaviour
         }
     }   
 
-    public void CloseErrorPanel()
+      public void CloseErrorPanel()
     {
         LoadGameErrorPanel.SetActive(false);
     }

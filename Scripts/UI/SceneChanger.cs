@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,7 @@ public static class SceneChanger
 	private static Scene MainScene;
 
 	private static Vector3 LastPlayerPositionBeforeChangingScene; //to make sure player will return to its original position
+	public static bool SaveShouldBeLoaded = false;
 
 	public static void UnloadBattleScene()
 	{
@@ -89,8 +91,7 @@ public static class SceneChanger
 
 	public static void StartGame()
 	{
-		var loadSceneAsyncTask =
-			SceneManager.LoadSceneAsync(
+		SceneManager.LoadScene(
 				SceneNames.v1
 					.ToString());	
     }
