@@ -19,7 +19,6 @@ public static class SaveHandler
         var playerItems = Newtonsoft.Json.JsonConvert.SerializeObject(playerObject.GetComponentInChildren<PlayerItems>().Items, Newtonsoft.Json.Formatting.None, jsonSettings);
         var playerPosition = JsonUtility.ToJson(GameObject.FindGameObjectWithTag("PlayerModel").transform.position);
         
-
         await File.WriteAllTextAsync(Path.Combine(Application.persistentDataPath, "/PlayerTeam.json"), playerCurrTeam);
         await File.WriteAllTextAsync(Path.Combine(Application.persistentDataPath, "/PlayerStorage.json"), playerCurrStorage);
         await File.WriteAllTextAsync(Path.Combine(Application.persistentDataPath, "/PlayerItems.json"), playerItems);
@@ -32,7 +31,6 @@ public static class SaveHandler
         var playerCurrStorage = Newtonsoft.Json.JsonConvert.DeserializeObject(await File.ReadAllTextAsync((Path.Combine(Application.persistentDataPath, "/PlayerStorage.json"))));
         var playerItems = Newtonsoft.Json.JsonConvert.DeserializeObject(await File.ReadAllTextAsync((Path.Combine(Application.persistentDataPath, "/PlayerItems.json"))));
         var playerPosition = Newtonsoft.Json.JsonConvert.DeserializeObject<Vector3>(await File.ReadAllTextAsync((Path.Combine(Application.persistentDataPath, "/PlayerPosition.json"))));
-
 
         if (playerCurrTeam is null
             || playerCurrStorage is null

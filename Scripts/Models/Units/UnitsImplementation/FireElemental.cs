@@ -30,7 +30,6 @@ public class FireElemental : BaseUnit
 		uint staminaLearned,
 		bool hasBeenSeen,
 		bool hasBeenCaught,
-		HoldItem heldItem,
 		float experiencePointsWorth,
 		float experiencePointsRequirementMultiplier,
 		uint spawnRate,

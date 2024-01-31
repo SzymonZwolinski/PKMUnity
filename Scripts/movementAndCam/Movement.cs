@@ -5,11 +5,11 @@ public class Movement : MonoBehaviour
 	private CharacterController controller;
 	private Vector3 playerVelocity;
 	private float playerSpeed = 2.0f;
-	private float sprintMultiplier = 3.0f; // Mno¿nik przyœpieszenia
+	private float sprintMultiplier = 3.0f; 
 
 
-	private Transform mainCameraTransform; // Transform kamery
-	private Vector3 initialCameraForward; // Pocz¹tkowy wektor kierunku kamery
+	private Transform mainCameraTransform; 
+	private Vector3 initialCameraForward;
 
 	private bool IsMovementFrozen = false;
 
