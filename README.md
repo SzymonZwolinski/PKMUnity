@@ -40,6 +40,9 @@ In the game, each unit is distinct, possessing unique characteristics. As units 
 >Fire type attack on water unit does 0.5 of its damage.<br>
 >Wind type attack does 0.75 of its damage on Water-Earth typed unit.
 
+>[!NOTE]
+>Units models should be placed in the Resources folder and linked to their corresponding units property.
+
 The player is limited to a team size of six units. When the player's team exceeds this limit, units are automatically sent to storage. Notably, the initial unit in the player's team is always the "FireElemental" added at the start of the game. <br>
 
 During combat scenarios, enemy units adhere to the same rules as player units. Importantly, each player action in combat may be either preceded or followed by a turn from an enemy unit.<br>
