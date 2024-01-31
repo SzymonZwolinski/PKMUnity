@@ -41,7 +41,7 @@ In the game, each unit is distinct, possessing unique characteristics. As units 
 >Wind type attack does 0.75 of its damage on Water-Earth typed unit.
 
 >[!NOTE]
->Units models should be placed in the Resources folder and linked to their corresponding units property.
+>Units models should be placed in the Resources folder and set in the corresponding unit property.
 
 The player is limited to a team size of six units. When the player's team exceeds this limit, units are automatically sent to storage. Notably, the initial unit in the player's team is always the "FireElemental" added at the start of the game. <br>
 
